@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Journal of National Academic Research and Innovation</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+    <!-- CSS -->
+    <style>
+/* Section */
+.publication-section {
+  padding: 80px 20px;
+  background: linear-gradient(180deg, #ffffff, #f4fbfa);
+  font-family: 'Inter', sans-serif;
+  animation: fadeInSection 1s ease-in-out;
+}
+
+/* Header */
+.pub-header {
+  text-align: center;
+  margin-bottom: 50px;
+  animation: fadeUp 1s ease;
+}
+
+.pub-header h2 {
+  font-size: 2.7rem;
+  background: linear-gradient(45deg, #00695c, #009688);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+.pub-header p {
+  max-width: 750px;
+  margin: auto;
+  color: #555;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Card */
+.pub-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px); /* glass effect */
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-left: 4px solid #009688;
+  position: relative;
+  overflow: hidden;
+margin-bottom: 20px;
+  /* entry animation */
+  animation: fadeUp 0.8s ease forwards;
+}
+
+/* Hover */
+.pub-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  border-left: 4px solid #004d40;
+  background: #f9fffe;
+}
+
+/* Glow effect */
+.pub-card:hover {
+  box-shadow: 0 15px 35px rgba(0,150,136,0.2);
+}
+
+/* Title */
+.pub-card h3 {
+  color: #00695c;
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  position: relative;
+}
+
+/* Animated underline */
+.pub-card h3::after {
+  content: "";
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #009688, #004d40);
+  display: block;
+  margin-top: 6px;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.pub-card:hover h3::after {
+  width: 80px;
+}
+
+/* Text */
+.pub-card p,
+.pub-card li {
+  color: #555;
+  font-size: 0.96rem;
+  line-height: 1.6;
+  transition: color 0.3s ease;
+}
+
+/* Slight text highlight on hover */
+.pub-card:hover p,
+.pub-card:hover li {
+  color: #333;
+}
+
+/* List */
+.pub-card ul {
+  padding-left: 18px;
+}
+
+/* Highlight card */
+.pub-card.highlight {
+  border-left: 4px solid #00695c;
+  background: linear-gradient(135deg, #e0f7f5, #ffffff);
+}
+
+/* Animated left border */
+.pub-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: 4px;
+  height: 0%;
+  background: linear-gradient(#009688, #004d40);
+  transition: height 0.5s ease;
+}
+
+.pub-card:hover::before {
+  height: 100%;
+}
+
+/* Soft floating animation */
+.pub-card {
+  animation: floatCard 6s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInSection {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes floatCard {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+    </style>
+</head>
+
+<body class="index-page">
+    <div class="site-header">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="container">
+                <!-- <p>
+      Call for Papers: Peer Reviewed | SCOPUS Indexed | SCImago Indexed |
+      Copernicus Indexed | UGC Approved 
+
+
+    </p>
+    <a href="#" class="submit-btn">Click to Submit</a> -->
+            </div>
+        </div>
+
+        <!-- Journal Header -->
+        <div class="journal-header">
+            <div class="container journal-flex">
+
+                <div class="logo">
+                    <img src="assets/img/logo.png" alt="IRJMS Logo">
+                </div>
+
+                <div class="journal-title">
+                    <h1>Journal of National Academic Research and Innovation (JNARI)</h1>
+
+                    <!-- <p class="journal-subtitle">
+        (Double Blind Peer Review Open Access Research Journal)
+        <span>ISSN – 2454-8499</span>
+        <span>Impact Factor 2.89 (GIF)</span>
+      </p> -->
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <header class="header sticky-top">
+
+
+
+            <nav class="navmenu">
+
+                <i class="mobile-nav-toggle bi bi-list"></i>
+
+                <ul>
+
+                    <li><a href="index.html">Home</a></li>
+
+
+                    <li><a href="editorial_board.html">Editorial Board</a></li>
+
+                    <!-- ABOUT -->
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle">
+                            About
+
+                        </a>
+
+                        <ul class="submenu">
+                            <li><a href="ethics_malpractice.html">Ethics & Malpractice</a></li>
+                            <li><a href="publication_policy.html" class="active">Publication Policy</a></li>
+                        </ul>
+
+                    </li>
+
+                    <!-- JOURNALS -->
+                   
+        
+              <li><a href="current_issue.html">Current Issue</a></li>
+              <li><a href="archive.html">Archive</a></li>
+
+                    <!-- RESEARCH -->
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle">
+                            Research / Papers
+
+                        </a>
+
+                        <ul class="submenu">
+                            <li><a href="submit_paper.html">Submit Paper</a></li>
+                            <li><a href="review_process.html">Review Process</a></li>
+                            <li><a href="accepted_papers.html">Accepted Papers</a></li>
+                            <li><a href="rejected_papers.html">Rejected Papers</a></li>
+                        </ul>
+
+                    </li>
+
+                    <li><a href="contact.html">Contact</a></li>
+
+                </ul>
+
+            </nav>
+
+    </div>
+    </div>
+    </header>
+    <main class="main">
+
+    <section class="publication-section">
+  <div class="container">
+
+    <div class="pub-header">
+      <h2>Publication Policies</h2>
+      <p>
+        Journal of National Academic Research & Innovation (JNARI) follows ethical and structured
+        publication standards aligned with national ISSN guidelines.
+      </p>
+    </div>
+
+    <div class="pub-grid">
+
+      <div class="pub-card">
+        <h3>1. Introduction</h3>
+        <p>
+          The Journal of National Academic Research & Innovation (JNARI) is a peer-reviewed scholarly journal dedicated to research in business administration, management, finance, economics, national business, and related disciplines. These publication policies follow ISSN guidelines and COPE standards.
+        </p>
+      </div>
+
+      <div class="pub-card">
+        <h3>2. Scope of the Journal</h3>
+        <ul>
+          <li>Original research articles</li>
+          <li>Review papers</li>
+          <li>Case studies</li>
+          <li>Conceptual papers</li>
+          <li>Short communications</li>
+          <li>Book reviews</li>
+        </ul>
+      </div>
+
+      <div class="pub-card">
+        <h3>3. Editorial Policy</h3>
+        <ul>
+          <li>Editorial independence in decision making</li>
+          <li>Decisions based on academic merit</li>
+          <li>Maintain confidentiality</li>
+          <li>Handle corrections and ethical issues</li>
+        </ul>
+      </div>
+
+      <div class="pub-card">
+        <h3>4. Peer Review Policy</h3>
+        <p><strong>Double-Blind Peer Review System</strong></p>
+        <ul>
+          <li>Confidential author & reviewer identity</li>
+          <li>Objective and constructive feedback</li>
+          <li>Evaluation based on originality and relevance</li>
+        </ul>
+      </div>
+
+      <div class="pub-card">
+        <h3>5. Author Guidelines & Ethics</h3>
+        <ul>
+          <li>Significant contribution required for authorship</li>
+          <li>No plagiarism, fabrication, or falsification</li>
+          <li>Ethical research compliance mandatory</li>
+          <li>All authors must approve submission</li>
+        </ul>
+      </div>
+
+      <div class="pub-card">
+        <h3>6. Submission Guidelines</h3>
+        <ul>
+          <li>Manuscripts must be in English</li>
+          <li>Structured abstract (150–250 words)</li>
+          <li>Keywords (5–7)</li>
+          <li>Word count: 4000–8000</li>
+        </ul>
+      </div>
+
+      <div class="pub-card">
+        <h3>7. ISSN Compliance</h3>
+        <ul>
+          <li>Maintain consistent journal identity</li>
+          <li>Display ISSN clearly</li>
+          <li>Ensure regular publication</li>
+          <li>Proper archiving of issues</li>
+        </ul>
+      </div>
+
+      <div class="pub-card">
+        <h3>8. Conflict of Interest</h3>
+        <p>
+          All contributors must disclose financial, professional, or personal conflicts that may influence research outcomes.
+        </p>
+      </div>
+
+      <div class="pub-card">
+        <h3>9. Open Access & Copyright</h3>
+        <ul>
+          <li>Gold or Hybrid Open Access model</li>
+          <li>Creative Commons licensing</li>
+          <li>Authors retain copyright</li>
+        </ul>
+      </div>
+
+      <div class="pub-card">
+        <h3>10. Retractions & Corrections</h3>
+        <ul>
+          <li>Retraction for plagiarism or fake data</li>
+          <li>Corrections for minor errors</li>
+          <li>Withdrawal before acceptance only</li>
+        </ul>
+      </div>
+
+      <div class="pub-card">
+        <h3>11. Archiving Policy</h3>
+        <p>
+          JNARI ensures long-term preservation through institutional repositories and national/international databases.
+        </p>
+      </div>
+
+      <div class="pub-card">
+        <h3>12. Publication Frequency</h3>
+        <p>
+          Quarterly / Biannual / Annual publication is maintained consistently for ISSN compliance.
+        </p>
+      </div>
+
+      <div class="pub-card">
+        <h3>13. Advertising Policy</h3>
+        <p>
+          Advertising does not influence editorial decisions. Sponsored content is clearly disclosed.
+        </p>
+      </div>
+
+      <div class="pub-card">
+        <h3>14. Confidentiality Policy</h3>
+        <p>
+          Manuscripts, reviewer identities, and editorial decisions are kept strictly confidential.
+        </p>
+      </div>
+
+      <div class="pub-card highlight">
+        <h3>15. Compliance</h3>
+        <p>
+          JNARI follows ISSN guidelines, COPE standards, ICMJE recommendations, and national scholarly publishing best practices.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+    </main>
+
+
+    <footer id="footer" class="footer position-relative light-background">
+
+        <div class="container footer-top">
+            <div class="row gy-4">
+
+                <!-- About Section -->
+                <div class="col-lg-4 col-md-6 footer-about">
+
+                    <a href="index.html" class="logo d-flex align-items-center">
+                        <span class="sitename">JNARI</span>
+                    </a>
+
+                    <div class="footer-contact pt-3">
+
+                        <p>
+                            Journal of National Academic Research and Innovation (JNARI)
+                        </p>
+
+                        <p>
+                            1st, Parihar Chowk, Sagar Apartment, Office No.03, Sanghvi Nagar, Ward No. 8, Sadhu Vasvani
+                            Nagar,
+                            Aundh, Pune, Maharashtra 411067
+                        </p>
+
+                        <p class="mt-3">
+                            <i class="bi bi-telephone-fill"></i>
+
+                            <span> +91 9096883042</span>
+                        </p>
+
+                        <p>
+                            <i class="bi bi-telephone-fill"></i>
+
+                            <span> +91 9370387303</span>
+                        </p>
+
+                        <p>
+                            <i class="bi bi-envelope-fill"></i>
+
+                            <span> info@mpea.org</span>
+                        </p>
+
+                    </div>
+
+                    <div class="social-links d-flex mt-4">
+
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+
+                    </div>
+
+                </div>
+
+                <!-- Quick Links -->
+
+                <div class="col-lg-4 col-md-6 footer-links">
+
+                    <h4>Quick Links</h4>
+
+                    <ul>
+
+                        <li><a href="index.html">Home</a></li>
+
+                        <li><a href="editorial_board.html">Editorial Board</a></li>
+
+                        <li><a href="ethics_malpractice.html">Ethics & Malpractice</a></li>
+
+                        <li><a href="publication_policy.html">Publication Policy</a></li>
+
+                        <li><a href="current_issue.html">Current Issue</a></li>
+
+                        <li><a href="archive.html">Archive</a></li>
+
+                        <li><a href="submit_paper.html">Submit Paper</a></li>
+
+                        <li><a href="review_process.html">Review Process</a></li>
+
+                        <li><a href="accepted_papers.html">Accepted Papers</a></li>
+
+                        <li><a href="rejected_papers.html">Rejected Papers</a></li>
+
+                        <li><a href="contact.html">Contact</a></li>
+
+                    </ul>
+
+                </div>
+
+                <!-- Newsletter -->
+
+                <div class="col-lg-4 col-md-12 footer-newsletter">
+
+                    <h4>Stay Connected</h4>
+
+                    <p>
+                        Subscribe to receive updates about MPEA programs and initiatives.
+                    </p>
+
+                    <form class="php-email-form">
+
+                        <div class="newsletter-form">
+
+                            <input type="email" placeholder="Enter your email">
+
+                            <input type="submit" value="Subscribe">
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Copyright -->
+
+        <div class="container copyright text-center mt-4">
+
+            <p>
+                © 2026 <strong class="px-1 sitename">MPEA</strong>
+                All Rights Reserved
+            </p>
+
+            <div class="credits">
+
+                Designed by
+                <a href="https://kdrtitsoutions.com/">KDRT IT Solutions</a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Main JS File -->
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const toggle = document.querySelector(".mobile-nav-toggle");
+            const navmenu = document.querySelector(".navmenu");
+            const dropdowns = document.querySelectorAll(".dropdown");
+
+            /* MOBILE MENU TOGGLE */
+
+            toggle.addEventListener("click", function () {
+
+                navmenu.classList.toggle("active");
+
+            });
+
+            /* DROPDOWN TOGGLE */
+
+            dropdowns.forEach(function (dropdown) {
+
+                const link = dropdown.querySelector(".dropdown-toggle");
+                const submenu = dropdown.querySelector(".submenu");
+
+                link.addEventListener("click", function (e) {
+
+                    if (window.innerWidth <= 768) {
+
+                        e.preventDefault();
+
+                        /* close other dropdowns */
+
+                        dropdowns.forEach(function (item) {
+
+                            if (item !== dropdown) {
+
+                                item.classList.remove("active");
+
+                                const otherMenu = item.querySelector(".submenu");
+
+                                if (otherMenu) {
+                                    otherMenu.classList.remove("show");
+                                }
+
+                            }
+
+                        });
+
+                        /* toggle current dropdown */
+
+                        dropdown.classList.toggle("active");
+                        submenu.classList.toggle("show");
+
+                    }
+
+                });
+
+            });
+
+            /* CLICK OUTSIDE CLOSE MENU */
+
+            document.addEventListener("click", function (e) {
+
+                if (!navmenu.contains(e.target) && !toggle.contains(e.target)) {
+
+                    navmenu.classList.remove("active");
+
+                    dropdowns.forEach(function (item) {
+
+                        item.classList.remove("active");
+
+                        const submenu = item.querySelector(".submenu");
+
+                        if (submenu) {
+                            submenu.classList.remove("show");
+                        }
+
+                    });
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+
+    <script>
+
+        function openTab(evt, tabName) {
+
+            let i, tabcontent, tabbuttons;
+
+            tabcontent = document.getElementsByClassName("tab-content");
+
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+
+            tabbuttons = document.getElementsByClassName("tab-btn");
+
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+
+        }
+
+    </script>
+    <script>
+        const faqItems = document.querySelectorAll(".faq-item");
+
+        faqItems.forEach(item => {
+            item.querySelector(".faq-question").addEventListener("click", () => {
+
+                item.classList.toggle("active");
+
+            });
+        });
+    </script>
+
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

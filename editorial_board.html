@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Journal of National Academic Research and Innovation</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+  <!-- CSS -->
+<style>
+.editorial-board {
+    padding: 80px 20px;
+   /* background: linear-gradient(180deg, #f0f9f8 0%, #e0f7f5 100%);*/
+   background: #fff;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.editorial-board::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(0,121,107,0.05) 0%, transparent 70%);
+    z-index: 0;
+}
+
+.editorial-board .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+.editorial-board h2 {
+    font-size: 2.8rem;
+    color: #004d40;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.editorial-board h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #26a69a, #00796b);
+    margin: 8px auto 0;
+    border-radius: 2px;
+}
+
+.editorial-board p {
+    color: #555;
+    font-size: 1rem;
+    max-width: 650px;
+    margin: 10px auto 0;
+}
+
+.editorial-board h3 {
+    font-size: 2rem;
+    color: #00796b;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 25px 20px 30px 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: transform 0.4s, box-shadow 0.4s, background 0.4s;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(135deg, rgba(38,166,154,0.05), rgba(0,121,107,0.05));
+    transform: rotate(25deg);
+    z-index: 0;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    background: #f1fdfb;
+     border: 2px solid #00796b; /* Colored border on hover */
+}
+
+
+.chief-editor {
+    max-width: 700px;
+    margin: 0 auto 60px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.member {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.member h4 {
+    color: #00796b;
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.member p {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+}
+
+.member a {
+    color: #00796b;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.member a:hover {
+    text-decoration: underline;
+}
+
+.member::before {
+    content: '';
+    display: block;
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #26a69a, #00796b);
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    position: relative;
+}
+</style>
+</head>
+
+<body class="index-page">
+    <div class="site-header">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="container">
+                <!-- <p>
+      Call for Papers: Peer Reviewed | SCOPUS Indexed | SCImago Indexed |
+      Copernicus Indexed | UGC Approved 
+
+
+    </p>
+    <a href="#" class="submit-btn">Click to Submit</a> -->
+            </div>
+        </div>
+
+        <!-- Journal Header -->
+        <div class="journal-header">
+            <div class="container journal-flex">
+
+                <div class="logo">
+                    <img src="assets/img/logo.png" alt="IRJMS Logo">
+                </div>
+
+                <div class="journal-title">
+                    <h1>Journal of National Academic Research and Innovation (JNARI)</h1>
+
+                    <!-- <p class="journal-subtitle">
+        (Double Blind Peer Review Open Access Research Journal)
+        <span>ISSN – 2454-8499</span>
+        <span>Impact Factor 2.89 (GIF)</span>
+      </p> -->
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <header class="header sticky-top">
+
+
+
+            <nav class="navmenu">
+
+                <i class="mobile-nav-toggle bi bi-list"></i>
+
+                <ul>
+
+                    <li><a href="index.html">Home</a></li>
+
+
+                    <li><a href="editorial_board.html" class="active">Editorial Board</a></li>
+
+                    <!-- ABOUT -->
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle">
+                            About
+
+                        </a>
+
+                        <ul class="submenu">
+                            <li><a href="ethics_malpractice.html">Ethics & Malpractice</a></li>
+                            <li><a href="publication_policy.html">Publication Policy</a></li>
+                        </ul>
+
+                    </li>
+
+                    <!-- JOURNALS -->
+                   
+        
+              <li><a href="current_issue.html">Current Issue</a></li>
+              <li><a href="archive.html">Archive</a></li>
+
+                    <!-- RESEARCH -->
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle">
+                            Research / Papers
+
+                        </a>
+
+                        <ul class="submenu">
+                            <li><a href="submit_paper.html">Submit Paper</a></li>
+                            <li><a href="review_process.html">Review Process</a></li>
+                            <li><a href="accepted_papers.html">Accepted Papers</a></li>
+                            <li><a href="rejected_papers.html">Rejected Papers</a></li>
+                        </ul>
+
+                    </li>
+
+                    <li><a href="contact.html">Contact</a></li>
+
+                </ul>
+
+            </nav>
+
+    </div>
+    </div>
+    </header>
+    <main class="main">
+
+      <!-- Editorial Board Section -->
+<section class="editorial-board">
+  <div class="container">
+    <div class="section-header">
+      <h2>Editorial Board</h2>
+      <p>Meet our distinguished editorial members who guide and oversee our journal.</p>
+    </div>
+
+    <!-- Editor In Chief -->
+    <div class="chief-editor card">
+      <h3>Editor In Chief</h3>
+      <h4>Rushikesh Y Hiwale</h4>
+      <p><strong>Designation:</strong> Head Of Department</p>
+      <p><strong>College & Address:</strong> PDEA's Baburaoji Gholap College, Sangvi, Pune - 411023</p>
+      <p><strong>Email:</strong> <a href="mailto:rushikesh.hiwale@smmm.org.in">rushikesh.hiwale@smmm.org.in</a></p>
+      <p><strong>Mobile:</strong> 09096883042</p>
+    </div>
+
+    <!-- Editorial Board Members -->
+    <div class="board-members">
+      <center><h3>Editorial Board Members</h3></center>
+      <div class="members-grid">
+        <!-- Member Card -->
+        <div class="member card">
+          <h4>Dr. Narsingh Giri</h4>
+          <p><strong>Designation:</strong> Vice Principal</p>
+          <p><strong>College & Address:</strong> PDEA's Waghire College Of Arts, Commerce And Science, Saswad, Tal Purandar, Pune-412301</p>
+          <p><strong>Email:</strong> <a href="mailto:narsigh,giri@smmm.org.in">narsigh,giri@smmm.org.in</a></p>
+          <p><strong>Mobile:</strong> 09689901127</p>
+        </div>
+
+        <div class="member card">
+          <h4>Dr. Ganesh R. Patare</h4>
+          <p><strong>Designation:</strong> Principal</p>
+          <p><strong>College & Address:</strong> Marathwada Mitra Mandal's College of Commerce, Pune</p>
+          <p><strong>Email:</strong> <a href="mailto:ganesh.patare@mmcc.edu.in">ganesh.patare@mmcc.edu.in</a></p>
+          <p><strong>Mobile:</strong> 9923607054</p>
+        </div>
+
+        <div class="member card">
+          <h4>Dr. Umrao Jamir Sayyad</h4>
+          <p><strong>Designation:</strong> Professor</p>
+          <p><strong>College & Address:</strong> PDEA's Baburaoji Gholap College, Sangvi, Pune - 411023</p>
+          <p><strong>Email:</strong> <a href="mailto:shaikhumrao@gmail.com">shaikhumrao@gmail.com</a></p>
+          <p><strong>Mobile:</strong> 09850820398</p>
+        </div>
+
+        <div class="member card">
+          <h4>Mr. Mayur Dattatray Mali</h4>
+          <p><strong>Designation:</strong> Assistant Professor</p>
+          <p><strong>College & Address:</strong> G H Raisoni International Skill Tech University, Pune</p>
+          <p><strong>Email:</strong> <a href="mailto:mayur.mali@ghristu.edu.in">mayur.mali@ghristu.edu.in</a></p>
+          <p><strong>Mobile:</strong> 9168511313</p>
+        </div>
+
+        <div class="member card">
+          <h4>Mr. Mahesh Nigade</h4>
+          <p><strong>Designation:</strong> Office Superintendent</p>
+          <p><strong>College & Address:</strong> MES’s Neville Wadia Institute of Management Studies & Research, Pune-411001</p>
+          <p><strong>Email:</strong> <a href="mailto:mahesh.nigade@nevillewadia.com">mahesh.nigade@nevillewadia.com</a></p>
+          <p><strong>Mobile:</strong> 8055358357</p>
+        </div>
+
+        <div class="member card">
+          <h4>Mr. Shubham Yende</h4>
+          <p><strong>Designation:</strong> Finance Manager</p>
+          <p><strong>College & Address:</strong> KDRT IT Solutions, Aundh Pune 411007</p>
+          <p><strong>Email:</strong> <a href="mailto:shubhamyende84@gmail.com">shubhamyende84@gmail.com</a></p>
+          <p><strong>Mobile:</strong> 7588428617</p>
+        </div>
+
+        <div class="member card">
+          <h4>Dr. Deepak Mahadeo Bharti</h4>
+          <p><strong>Designation:</strong> Professor in Economics</p>
+          <p><strong>College & Address:</strong> MSP Mandal's Rajmata Jijau Mahavidylaya, Kille Dharur, Dist. Beed (MS)</p>
+          <p><strong>Email:</strong> <a href="mailto:d.bharti7@yahoo.com">d.bharti7@yahoo.com</a></p>
+          <p><strong>Mobile:</strong> 9422353611</p>
+        </div>
+
+        <div class="member card">
+          <h4>Ms. Dhanashree Wagh</h4>
+          <p><strong>Designation:</strong> Technical Support</p>
+          <p><strong>College & Address:</strong> KDRT IT Solution, Pune</p>
+          <p><strong>Email:</strong> <a href="mailto:dhanashreewagh@kdrtit.in">dhanashreewagh@kdrtit.in</a></p>
+          <p><strong>Mobile:</strong> 8329483852</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    </main>
+
+
+    <footer id="footer" class="footer position-relative light-background">
+
+        <div class="container footer-top">
+            <div class="row gy-4">
+
+                <!-- About Section -->
+                <div class="col-lg-4 col-md-6 footer-about">
+
+                    <a href="index.html" class="logo d-flex align-items-center">
+                        <span class="sitename">JNARI</span>
+                    </a>
+
+                    <div class="footer-contact pt-3">
+
+                        <p>
+                            Journal of National Academic Research and Innovation (JNARI)
+                        </p>
+
+                        <p>
+                            1st, Parihar Chowk, Sagar Apartment, Office No.03, Sanghvi Nagar, Ward No. 8, Sadhu Vasvani
+                            Nagar,
+                            Aundh, Pune, Maharashtra 411067
+                        </p>
+
+                        <p class="mt-3">
+                            <i class="bi bi-telephone-fill"></i>
+
+                            <span> +91 9096883042</span>
+                        </p>
+
+                        <p>
+                            <i class="bi bi-telephone-fill"></i>
+
+                            <span> +91 9370387303</span>
+                        </p>
+
+                        <p>
+                            <i class="bi bi-envelope-fill"></i>
+
+                            <span> info@mpea.org</span>
+                        </p>
+
+                    </div>
+
+                    <div class="social-links d-flex mt-4">
+
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+
+                    </div>
+
+                </div>
+
+                <!-- Quick Links -->
+
+                <div class="col-lg-4 col-md-6 footer-links">
+
+                    <h4>Quick Links</h4>
+
+                    <ul>
+
+                        <li><a href="index.html">Home</a></li>
+
+                        <li><a href="editorial_board.html">Editorial Board</a></li>
+
+                        <li><a href="ethics_malpractice.html">Ethics & Malpractice</a></li>
+
+                        <li><a href="publication_policy.html">Publication Policy</a></li>
+
+                        <li><a href="current_issue.html">Current Issue</a></li>
+
+                        <li><a href="archive.html">Archive</a></li>
+
+                        <li><a href="submit_paper.html">Submit Paper</a></li>
+
+                        <li><a href="review_process.html">Review Process</a></li>
+
+                        <li><a href="accepted_papers.html">Accepted Papers</a></li>
+
+                        <li><a href="rejected_papers.html">Rejected Papers</a></li>
+
+                        <li><a href="contact.html">Contact</a></li>
+
+                    </ul>
+
+                </div>
+
+                <!-- Newsletter -->
+
+                <div class="col-lg-4 col-md-12 footer-newsletter">
+
+                    <h4>Stay Connected</h4>
+
+                    <p>
+                        Subscribe to receive updates about MPEA programs and initiatives.
+                    </p>
+
+                    <form class="php-email-form">
+
+                        <div class="newsletter-form">
+
+                            <input type="email" placeholder="Enter your email">
+
+                            <input type="submit" value="Subscribe">
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Copyright -->
+
+        <div class="container copyright text-center mt-4">
+
+            <p>
+                © 2026 <strong class="px-1 sitename">MPEA</strong>
+                All Rights Reserved
+            </p>
+
+            <div class="credits">
+
+                Designed by
+                <a href="https://kdrtitsoutions.com/">KDRT IT Solutions</a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Main JS File -->
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const toggle = document.querySelector(".mobile-nav-toggle");
+            const navmenu = document.querySelector(".navmenu");
+            const dropdowns = document.querySelectorAll(".dropdown");
+
+            /* MOBILE MENU TOGGLE */
+
+            toggle.addEventListener("click", function () {
+
+                navmenu.classList.toggle("active");
+
+            });
+
+            /* DROPDOWN TOGGLE */
+
+            dropdowns.forEach(function (dropdown) {
+
+                const link = dropdown.querySelector(".dropdown-toggle");
+                const submenu = dropdown.querySelector(".submenu");
+
+                link.addEventListener("click", function (e) {
+
+                    if (window.innerWidth <= 768) {
+
+                        e.preventDefault();
+
+                        /* close other dropdowns */
+
+                        dropdowns.forEach(function (item) {
+
+                            if (item !== dropdown) {
+
+                                item.classList.remove("active");
+
+                                const otherMenu = item.querySelector(".submenu");
+
+                                if (otherMenu) {
+                                    otherMenu.classList.remove("show");
+                                }
+
+                            }
+
+                        });
+
+                        /* toggle current dropdown */
+
+                        dropdown.classList.toggle("active");
+                        submenu.classList.toggle("show");
+
+                    }
+
+                });
+
+            });
+
+            /* CLICK OUTSIDE CLOSE MENU */
+
+            document.addEventListener("click", function (e) {
+
+                if (!navmenu.contains(e.target) && !toggle.contains(e.target)) {
+
+                    navmenu.classList.remove("active");
+
+                    dropdowns.forEach(function (item) {
+
+                        item.classList.remove("active");
+
+                        const submenu = item.querySelector(".submenu");
+
+                        if (submenu) {
+                            submenu.classList.remove("show");
+                        }
+
+                    });
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+    <script>
+
+        const counters = document.querySelectorAll(".counter");
+
+        const observer = new IntersectionObserver(entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    const counter = entry.target;
+                    const target = +counter.getAttribute("data-count");
+                    let count = 0;
+
+                    const updateCounter = () => {
+
+                        const increment = target / 100;
+
+                        if (count < target) {
+                            count += increment;
+                            counter.innerText = Math.ceil(count);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.innerText = target + "+";
+                        }
+
+                    };
+
+                    updateCounter();
+                    observer.unobserve(counter);
+
+                }
+
+            });
+
+        }, { threshold: 0.6 });
+
+        counters.forEach(counter => {
+            observer.observe(counter);
+        });
+
+    </script>
+    <script>
+
+        function openTab(evt, tabName) {
+
+            let i, tabcontent, tabbuttons;
+
+            tabcontent = document.getElementsByClassName("tab-content");
+
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+
+            tabbuttons = document.getElementsByClassName("tab-btn");
+
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+
+        }
+
+    </script>
+    <script>
+        const faqItems = document.querySelectorAll(".faq-item");
+
+        faqItems.forEach(item => {
+            item.querySelector(".faq-question").addEventListener("click", () => {
+
+                item.classList.toggle("active");
+
+            });
+        });
+    </script>
+
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

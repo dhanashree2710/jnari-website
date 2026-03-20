@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Journal of National Academic Research and Innovation</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .contact-section {
+      padding: 100px 20px;
+      background: linear-gradient(180deg, #e6f7f3, #ffffff);
+      font-family: 'Inter', sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Map Styling */
+    .map-wrapper iframe {
+      width: 100%;
+      height: 350px;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      margin-bottom: 60px;
+      transition: transform 0.3s ease;
+    }
+
+    .map-wrapper iframe:hover {
+      transform: scale(1.02);
+    }
+
+    /* Container Grid */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* Section Titles */
+    .contact-info h2,
+    .contact-form h2 {
+      font-size: 36px;
+      color: #065e4b;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .contact-info h2::after,
+    .contact-form h2::after {
+      content: '';
+      width: 60px;
+      height: 4px;
+      background: #33a88e;
+      display: block;
+      margin-top: 8px;
+      border-radius: 2px;
+    }
+
+    /* Info Items */
+    .info-item {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .info-item i {
+      font-size: 28px;
+      color: #fff;
+      background: #33a88e;
+      padding: 12px;
+      border-radius: 50%;
+      min-width: 50px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(51, 168, 142, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .info-item:hover i {
+      transform: scale(1.2);
+      box-shadow: 0 12px 30px rgba(51, 168, 142, 0.5);
+    }
+
+    .info-item h4 {
+      margin: 0;
+      font-size: 16px;
+      color: #065e4b;
+    }
+
+    .info-item p {
+      margin: 2px 0 0 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* Contact Form Styling */
+    .contact-form {
+      background: #ffffff;
+      padding: 40px 35px;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .contact-form:hover {
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+    }
+
+    .contact-form .form-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #ccc;
+      border-radius: 50px;
+      font-size: 15px;
+      transition: all 0.4s ease;
+      background: #f9fdfb;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #33a88e;
+      box-shadow: 0 4px 20px rgba(51, 168, 142, 0.2);
+      outline: none;
+    }
+
+    /* Floating labels effect */
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: #999;
+      font-weight: 500;
+    }
+
+    /* Button Styling */
+    .btn-submit {
+      margin-top: 10px;
+      background: linear-gradient(135deg, #065e4b, #33a88e);
+      color: #fff;
+      padding: 14px 35px;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.4s ease;
+      box-shadow: 0 8px 20px rgba(51, 168, 142, 0.3);
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #33a88e, #065e4b);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(51, 168, 142, 0.5);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      .contact-grid {
+        gap: 40px;
+      }
+
+      .contact-form {
+        padding: 30px 25px;
+      }
+    }
+  </style>
+</head>
+
+<body class="index-page">
+  <div class="site-header">
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="container">
+        <!-- <p>
+      Call for Papers: Peer Reviewed | SCOPUS Indexed | SCImago Indexed |
+      Copernicus Indexed | UGC Approved 
+
+
+    </p>
+    <a href="#" class="submit-btn">Click to Submit</a> -->
+      </div>
+    </div>
+
+    <!-- Journal Header -->
+    <div class="journal-header">
+      <div class="container journal-flex">
+
+        <div class="logo">
+          <img src="assets/img/logo.png" alt="IRJMS Logo">
+        </div>
+
+        <div class="journal-title">
+          <h1>Journal of National Academic Research and Innovation (JNARI)</h1>
+
+          <!-- <p class="journal-subtitle">
+        (Double Blind Peer Review Open Access Research Journal)
+        <span>ISSN – 2454-8499</span>
+        <span>Impact Factor 2.89 (GIF)</span>
+      </p> -->
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="header sticky-top">
+
+
+
+      <nav class="navmenu">
+
+        <i class="mobile-nav-toggle bi bi-list"></i>
+
+        <ul>
+
+          <li><a href="index.html">Home</a></li>
+
+
+          <li><a href="editorial_board.html">Editorial Board</a></li>
+
+          <!-- ABOUT -->
+          <li class="dropdown">
+
+            <a href="#" class="dropdown-toggle">
+              About
+
+            </a>
+
+            <ul class="submenu">
+              <li><a href="ethics_malpractice.html">Ethics & Malpractice</a></li>
+              <li><a href="publication_policy.html">Publication Policy</a></li>
+            </ul>
+
+          </li>
+
+          <!-- JOURNALS -->
+          
+        
+              <li><a href="current_issue.html">Current Issue</a></li>
+              <li><a href="archive.html">Archive</a></li>
+
+          <!-- RESEARCH -->
+          <li class="dropdown">
+
+            <a href="#" class="dropdown-toggle">
+              Research / Papers
+
+            </a>
+
+            <ul class="submenu">
+              <li><a href="submit_paper.html">Submit Paper</a></li>
+              <li><a href="review_process.html">Review Process</a></li>
+              <li><a href="accepted_papers.html">Accepted Papers</a></li>
+              <li><a href="rejected_papers.html">Rejected Papers</a></li>
+            </ul>
+
+          </li>
+
+          <li><a href="contact.html" class="active">Contact</a></li>
+
+        </ul>
+
+      </nav>
+
+  </div>
+  </div>
+  </header>
+
+  <main class="main">
+
+    </section><!-- /Hero Section -->
+    <!-- Journal Information Section -->
+    <section id="journal-info" class="py-5" style="background-color: var(--background-color);">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold" style="color: var(--heading-color);">Journal of National Academic Research and Innovation
+            (JNARI)</h2>
+          <p class="fs-5" style="color: var(--accent-color);">National Journal | Monthly | English</p>
+        </div>
+
+        <div class="row g-4">
+          <!-- Publisher Info Card -->
+          <div class="col-md-6 col-lg-4">
+            <div class="journal-card h-100">
+              <div class="card-icon">
+                <i class="bi bi-building"></i>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Publisher Information</h5>
+                <p><strong>Publishing Body:</strong> Sujata Institute of Information and Technology</p>
+                <p><strong>Address:</strong> Office No.03, Sagar Apartment, Pune City, 411007, Maharashtra</p>
+                <p><strong>Email:</strong> <a
+                    href="mailto:sujatainstitute2016@gmail.com">sujatainstitute2016@gmail.com</a></p>
+                <p><strong>Mobile:</strong> +91 9096883042</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Editor Info Card -->
+          <div class="col-md-6 col-lg-4">
+            <div class="journal-card h-100">
+              <div class="card-icon">
+                <i class="bi bi-person-badge"></i>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Editor In Chief</h5>
+                <p><strong>Name:</strong> Mr. Rushikesh Y Hiwale</p>
+                <p><strong>Position:</strong> HOD, Baburaoji Gholap College, Sangvi, Pune</p>
+                <p><strong>Email:</strong> <a
+                    href="mailto:rushikesh.hiwale@smmm.org.in">rushikesh.hiwale@smmm.org.in</a></p>
+                <p><strong>Mobile:</strong> +91 9096883042</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Journal Details Card -->
+          <div class="col-md-12 col-lg-4">
+            <div class="journal-card h-100">
+              <div class="card-icon">
+                <i class="bi bi-journal-bookmark"></i>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Journal Details</h5>
+                <p><strong>Serial Title:</strong> Journal of National Academic Research and Innovation (JNARI)</p>
+                <p><strong>Starting Year:</strong> 2025</p>
+                <p><strong>Frequency:</strong> Monthly</p>
+                <p><strong>Format:</strong> Online</p>
+                <p><strong>Subject:</strong> Business Management / Public Relations</p>
+                <p><strong>ISSN Application ID:</strong> 71946</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+    <section id="contact" class="contact-section">
+
+      <div class="map-wrapper" data-aos="fade-up">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.3013985302036!2d73.80685107344078!3d18.560445782540814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bfb8cb496cb9%3A0xb3a206f04200d0db!2sSujata%20Institute%20Of%20Information%20And%20Technology.!5e0!3m2!1sen!2sin!4v1773672021428!5m2!1sen!2sin"
+          style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <div class="container">
+
+        <div class="contact-grid">
+
+          <!-- Contact Info -->
+          <div class="contact-info">
+            <h2>Contact Us</h2>
+            <p>Reach out to us with your queries or submit your research papers.</p>
+
+            <div class="info-item">
+              <i class="bi bi-geo-alt"></i>
+              <div>
+                <h4>Address</h4>
+                <p>First Floor, Parihar Chowk, Sagar Apartment, Office No03, Sanghvi Nagar, Ward No. 8, Sadhu Vasvani
+                  Nagar, Aundh, Pune, Maharashtra 411067</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <i class="bi bi-telephone"></i>
+              <div>
+                <h4>Call Us</h4>
+                <p>+91 9096883042<br>+91 9370387303</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <i class="bi bi-envelope"></i>
+              <div>
+                <h4>Email Us</h4>
+                <p>info@mpea.org</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form">
+            <h2>Send a Message</h2>
+            <form action="mailto:info@mpea.org" method="post" enctype="text/plain" class="email-form">
+              <div class="form-group">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+              </div>
+              <input type="text" name="subject" placeholder="Subject" required>
+              <textarea name="message" rows="6" placeholder="Message" required></textarea>
+              <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <footer id="footer" class="footer position-relative light-background">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+
+        <!-- About Section -->
+        <div class="col-lg-4 col-md-6 footer-about">
+
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">JNARI</span>
+          </a>
+
+          <div class="footer-contact pt-3">
+
+            <p>
+              Journal of National Academic Research and Innovation (JNARI)
+            </p>
+
+            <p>
+              1st, Parihar Chowk, Sagar Apartment, Office No.03, Sanghvi Nagar, Ward No. 8, Sadhu Vasvani Nagar,
+              Aundh, Pune, Maharashtra 411067
+            </p>
+
+            <p class="mt-3">
+              <i class="bi bi-telephone-fill"></i>
+
+              <span> +91 9096883042</span>
+            </p>
+
+            <p>
+              <i class="bi bi-telephone-fill"></i>
+
+              <span> +91 9370387303</span>
+            </p>
+
+            <p>
+              <i class="bi bi-envelope-fill"></i>
+
+              <span> info@mpea.org</span>
+            </p>
+
+          </div>
+
+          <div class="social-links d-flex mt-4">
+
+            <a href="#"><i class="bi bi-twitter"></i></a>
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+
+          </div>
+
+        </div>
+
+        <!-- Quick Links -->
+
+        <div class="col-lg-4 col-md-6 footer-links">
+
+          <h4>Quick Links</h4>
+
+          <ul>
+
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="editorial_board.html">Editorial Board</a></li>
+
+            <li><a href="ethics_malpractice.html">Ethics & Malpractice</a></li>
+
+            <li><a href="publication_policy.html">Publication Policy</a></li>
+
+            <li><a href="current_issue.html">Current Issue</a></li>
+
+            <li><a href="archive.html">Archive</a></li>
+
+            <li><a href="submit_paper.html">Submit Paper</a></li>
+
+            <li><a href="review_process.html">Review Process</a></li>
+
+            <li><a href="accepted_papers.html">Accepted Papers</a></li>
+
+            <li><a href="rejected_papers.html">Rejected Papers</a></li>
+
+            <li><a href="contact.html">Contact</a></li>
+
+          </ul>
+
+        </div>
+
+        <!-- Newsletter -->
+
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+
+          <h4>Stay Connected</h4>
+
+          <p>
+            Subscribe to receive updates about MPEA programs and initiatives.
+          </p>
+
+          <form class="php-email-form">
+
+            <div class="newsletter-form">
+
+              <input type="email" placeholder="Enter your email">
+
+              <input type="submit" value="Subscribe">
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Copyright -->
+
+    <div class="container copyright text-center mt-4">
+
+      <p>
+        © 2026 <strong class="px-1 sitename">MPEA</strong>
+        All Rights Reserved
+      </p>
+
+      <div class="credits">
+
+        Designed by
+        <a href="https://kdrtitsoutions.com/">KDRT IT Solutions</a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

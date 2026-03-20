@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JNARI Full Admin System</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{display:flex;background:#f3f7f6}
+
+.sidebar{width:250px;height:100vh;background:linear-gradient(180deg,#003d36,#009688);color:#fff;padding:20px;position:fixed}
+.sidebar h2{text-align:center;margin-bottom:30px}
+.sidebar ul{list-style:none}
+.sidebar ul li{padding:12px;margin-bottom:10px;border-radius:8px;cursor:pointer}
+.sidebar ul li:hover{background:rgba(255,255,255,0.2)}
+
+.main{margin-left:250px;width:100%;padding:20px}
+.topbar{display:flex;justify-content:space-between;margin-bottom:20px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.card{padding:20px;border-radius:12px;color:#fff}
+.card1{background:#009688}
+.card2{background:#2196f3}
+.card3{background:#4caf50}
+.card4{background:#f44336}
+
+.section{margin-top:30px;background:#fff;padding:20px;border-radius:12px}
+
+input,select{padding:10px;margin:5px;width:200px}
+button{padding:8px 12px;border:none;border-radius:6px;cursor:pointer}
+
+.approve{background:#4caf50;color:#fff}
+.reject{background:#f44336;color:#fff}
+
+.status{padding:5px 10px;border-radius:5px;color:#fff}
+.pending{background:#ff9800}
+.accepted{background:#4caf50}
+.rejected{background:#f44336}
+
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th,td{padding:10px;border-bottom:1px solid #eee}
+th{background:#009688;color:#fff}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>JNARI</h2>
+  <ul>
+    <li>Dashboard</li>
+    <li>Submissions</li>
+    <li>Reviewers</li>
+    <li>Authors</li>
+    <li>Reports</li>
+  </ul>
+</div>
+
+<div class="main">
+
+<div class="topbar">
+  <h2>Admin Dashboard</h2>
+  <span>Welcome Admin</span>
+</div>
+
+<div class="cards">
+  <div class="card card1"><h3>Total</h3><p id="total">0</p></div>
+  <div class="card card2"><h3>Pending</h3><p id="pending">0</p></div>
+  <div class="card card3"><h3>Accepted</h3><p id="accepted">0</p></div>
+  <div class="card card4"><h3>Rejected</h3><p id="rejected">0</p></div>
+</div>
+
+<div class="section">
+  <h3>Add Submission</h3>
+  <input id="author" placeholder="Author">
+  <input id="title" placeholder="Title">
+  <button onclick="addSubmission()">Submit</button>
+</div>
+
+<div class="section">
+  <h3>Manage Submissions</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Author</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+</div>
+
+</div>
+
+<script>
+// Firebase Config
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_PROJECT_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// Add Submission
+function addSubmission(){
+  const author=document.getElementById('author').value;
+  const title=document.getElementById('title').value;
+
+  db.collection('submissions').add({
+    author,title,status:'Pending',created_at:new Date()
+  });
+}
+
+// Load Data
+function loadData(){
+  db.collection('submissions').onSnapshot(snapshot=>{
+    let total=0,pending=0,accepted=0,rejected=0;
+    const table=document.getElementById('tableBody');
+    table.innerHTML='';
+
+    snapshot.forEach(doc=>{
+      const d=doc.data();
+      total++;
+      if(d.status==='Pending')pending++;
+      if(d.status==='Accepted')accepted++;
+      if(d.status==='Rejected')rejected++;
+
+      table.innerHTML+=`<tr>
+        <td>${d.author}</td>
+        <td>${d.title}</td>
+        <td><span class="status ${d.status.toLowerCase()}">${d.status}</span></td>
+        <td>
+          <button onclick="updateStatus('${doc.id}','Accepted')" class="approve">Approve</button>
+          <button onclick="updateStatus('${doc.id}','Rejected')" class="reject">Reject</button>
+        </td>
+      </tr>`;
+    });
+
+    document.getElementById('total').innerText=total;
+    document.getElementById('pending').innerText=pending;
+    document.getElementById('accepted').innerText=accepted;
+    document.getElementById('rejected').innerText=rejected;
+  });
+}
+
+// Update Status
+function updateStatus(id,status){
+  db.collection('submissions').doc(id).update({status});
+}
+
+loadData();
+</script>
+
+</body>
+</html>
