@@ -32,69 +32,64 @@
     <!-- Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
     <!-- CSS -->
+  <style>
+    .issue-section{
+padding:60px 0;
+background:#f5f6fa;
+}
 
+.issue-wrapper{
+max-width:950px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:6px;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
 
-    <style>
-        .accepted-papers {
-            max-width: 900px;
-            margin: 80px auto;
-            padding: 35px;
-            background: #ffffff;
-            border: 1px solid #e2e2e2;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        }
+.issue-title{
+font-size:24px;
+font-weight:700;
+margin-bottom:25px;
+}
 
-        .section-title {
-            font-size: 26px;
-            font-weight: 700;
-       
-            color: #065e4b;
-        }
+.paper{
+border-top:1px solid #ddd;
+padding:20px 0;
+}
 
-        .paper-item {
-            padding: 10px 0;
-            border-top: 1px solid #dcdcdc;
-        }
+.paper-type{
+font-weight:700;
+color:#333;
+}
 
-        .paper-item:first-child {
-            border-top: none;
-        }
+.paper-title{
+font-size:18px;
+color:#33a88e;
+font-weight:600;
+margin-top:3px;
+}
 
-        .paper-title {
-            font-size: 17px;
-            font-weight: 600;
-            color: #33a88e;
-        }
+.paper-meta{
+font-size:14px;
+margin-top:4px;
+color:#444;
+}
 
-        .paper-author {
-            font-size: 14px;
-            margin: 6px 0 12px 0;
-            color: #555;
-        }
+.buttons{
+margin-top:10px;
+}
 
-        .paper-type {
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
+.buttons button{
+background:#33a88e;
+color:white;
+border:none;
+padding:8px 15px;
+margin-right:8px;
+border-radius:4px;
+}
+  </style>
 
-        .btn-group button {
-            background: #33a88e;
-            color: white;
-            border: none;
-            padding: 8px 14px;
-            margin-right: 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 13px;
-            margin-bottom: 15px;
-        }
-
-        .btn-group button:hover {
-            background: #23856f;
-        }
-    </style>
 </head>
 
 <body class="index-page">
@@ -164,10 +159,11 @@
 
                     </li>
 
-
-
-                    <li><a href="current_issue.html">Current Issue</a></li>
-                    <li><a href="archive.html">Archive</a></li>
+                    <!-- JOURNALS -->
+                  
+        
+              <li><a href="current_issue.html">Current Issue</a></li>
+              <li><a href="archive.html">Archive</a></li>
 
                     <!-- RESEARCH -->
                     <li class="dropdown">
@@ -196,20 +192,23 @@
     </div>
     </header>
     <main class="main">
+<section class="issue-section">
+<div class="container">
 
-        <section class="accepted-papers">
+<div class="issue-wrapper">
 
-            <h2 class="section-title">Accepted Papers</h2>
+<div id="issueName" class="issue-title"></div>
 
-            <div id="acceptedPaperList"></div>
+<div id="papersList"></div>
 
-        </section>
+</div>
 
+</div>
+</section>
 
     </main>
 
-
-    <footer id="footer" class="footer position-relative light-background">
+ <footer id="footer" class="footer position-relative light-background">
 
         <div class="container footer-top">
             <div class="row gy-4">
@@ -345,206 +344,127 @@
 
     </footer>
 
-    <!-- Scroll Top -->
-    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
 
-    <!-- Preloader -->
-    <div id="preloader"></div>
+<script type="module">
 
-    <!-- Vendor JS Files -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"
 
-    <!-- Main JS File -->
-    <script>
+const supabase = createClient(
+"https://imqivfwfnjvlbvcmenki.supabase.co",
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltcWl2Zndmbmp2bGJ2Y21lbmtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTg4MDYsImV4cCI6MjA4OTU3NDgwNn0.na-q6d7FnqAoTe_2oAyW7idIfvorg8kCvxe8sHgD0rQ"
+)
 
-        document.addEventListener("DOMContentLoaded", function () {
 
-            const toggle = document.querySelector(".mobile-nav-toggle");
-            const navmenu = document.querySelector(".navmenu");
-            const dropdowns = document.querySelectorAll(".dropdown");
+/* GET ISSUE ID FROM URL */
 
-            /* MOBILE MENU TOGGLE */
+const params = new URLSearchParams(window.location.search)
+const issueId = params.get("issue_id")
 
-            toggle.addEventListener("click", function () {
+console.log("Issue ID:", issueId)
 
-                navmenu.classList.toggle("active");
 
-            });
+/* LOAD ISSUE NAME */
 
-            /* DROPDOWN TOGGLE */
+async function loadIssue(){
 
-            dropdowns.forEach(function (dropdown) {
+const { data, error } = await supabase
+.from("issues")
+.select("*")
+.eq("id", issueId)
+.single()
 
-                const link = dropdown.querySelector(".dropdown-toggle");
-                const submenu = dropdown.querySelector(".submenu");
+if(error){
+console.log("Issue Error:", error)
+return
+}
 
-                link.addEventListener("click", function (e) {
+console.log("Issue Data:", data)
 
-                    if (window.innerWidth <= 768) {
+if(data){
+document.getElementById("issueName").innerText = data.issue_name
+}
 
-                        e.preventDefault();
+}
 
-                        /* close other dropdowns */
+loadIssue()
 
-                        dropdowns.forEach(function (item) {
 
-                            if (item !== dropdown) {
+/* LOAD PAPERS */
 
-                                item.classList.remove("active");
+async function loadPapers(){
 
-                                const otherMenu = item.querySelector(".submenu");
+const { data, error } = await supabase
+.from("papers")
+.select("*")
+.eq("issue_id", issueId)
 
-                                if (otherMenu) {
-                                    otherMenu.classList.remove("show");
-                                }
+if(error){
+console.log("Paper Error:", error)
+return
+}
 
-                            }
+console.log("Papers:", data)
 
-                        });
+let html=""
 
-                        /* toggle current dropdown */
+if(data.length === 0){
+html = "<p>No papers found for this issue.</p>"
+}
 
-                        dropdown.classList.toggle("active");
-                        submenu.classList.toggle("show");
+data.forEach(paper=>{
 
-                    }
+html += `
 
-                });
+<div class="paper">
 
-            });
+<div class="paper-type">${paper.category || ""}</div>
 
-            /* CLICK OUTSIDE CLOSE MENU */
+<div class="paper-title">${paper.title || ""}</div>
 
-            document.addEventListener("click", function (e) {
-
-                if (!navmenu.contains(e.target) && !toggle.contains(e.target)) {
-
-                    navmenu.classList.remove("active");
-
-                    dropdowns.forEach(function (item) {
-
-                        item.classList.remove("active");
-
-                        const submenu = item.querySelector(".submenu");
-
-                        if (submenu) {
-                            submenu.classList.remove("show");
-                        }
-
-                    });
-
-                }
-
-            });
-
-        });
-
-    </script>
-
-
-    <script>
-
-        function openTab(evt, tabName) {
-
-            let i, tabcontent, tabbuttons;
-
-            tabcontent = document.getElementsByClassName("tab-content");
-
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].classList.remove("active");
-            }
-
-            tabbuttons = document.getElementsByClassName("tab-btn");
-
-            for (i = 0; i < tabbuttons.length; i++) {
-                tabbuttons[i].classList.remove("active");
-            }
-
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
-
-        }
-
-    </script>
-    <script>
-        const faqItems = document.querySelectorAll(".faq-item");
-
-        faqItems.forEach(item => {
-            item.querySelector(".faq-question").addEventListener("click", () => {
-
-                item.classList.toggle("active");
-
-            });
-        });
-    </script>
-
-    <script src="assets/js/main.js"></script>
-    <script type="module">
-
-        import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"
-
-        const supabase = createClient(
-            "https://imqivfwfnjvlbvcmenki.supabase.co",
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltcWl2Zndmbmp2bGJ2Y21lbmtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTg4MDYsImV4cCI6MjA4OTU3NDgwNn0.na-q6d7FnqAoTe_2oAyW7idIfvorg8kCvxe8sHgD0rQ"
-        )
-
-
-        async function loadAcceptedPapers() {
-
-            const { data, error } = await supabase
-                .from("papers")
-                .select("*")
-                .eq("status", "Accepted")
-
-            if (error) {
-                console.log(error)
-                return
-            }
-
-            let html = ""
-
-            data.forEach(paper => {
-
-                html += `
-
-<div class="paper-item">
-
-
-
-<div class="paper-title">
-${paper.title}
+<div class="paper-meta">
+<b>Author:</b> ${paper.author || ""}
 </div>
 
-<div class="paper-author">
-${paper.author}
+<div class="paper-meta">
+<b>Institution:</b> ${paper.institution || ""}
 </div>
 
-<div class="btn-group">
+<div class="paper-meta">
+<b>Country:</b> ${paper.country || ""}
+</div>
+
+<div class="paper-meta">
+<b>Status:</b> ${paper.status || ""}
+</div>
+
+<div class="buttons">
 
 <button onclick="window.open('${paper.file_url}','_blank')">
-View Paper
+Full Article - PDF
 </button>
 
+<button>
+Review History
+</button>
+
+<button>
+Discussion
+</button>
+
+</div>
 
 </div>
 
 `
 
-            })
+})
 
-            document.getElementById("acceptedPaperList").innerHTML = html
+document.getElementById("papersList").innerHTML = html
 
-        }
+}
 
-        loadAcceptedPapers()
+loadPapers()
 
-    </script>
+</script>
 </body>
-
 </html>

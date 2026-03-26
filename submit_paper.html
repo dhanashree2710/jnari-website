@@ -32,9 +32,10 @@
     <!-- Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
 
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
 
 
     <!-- CSS -->
@@ -254,10 +255,10 @@
                     </li>
 
                     <!-- JOURNALS -->
-                    
-        
-              <li><a href="current_issue.html">Current Issue</a></li>
-              <li><a href="archive.html">Archive</a></li>
+
+
+                    <li><a href="current_issue.html">Current Issue</a></li>
+                    <li><a href="archive.html">Archive</a></li>
 
                     <!-- RESEARCH -->
                     <li class="dropdown">
@@ -307,35 +308,59 @@
 
                         <div class="form-group">
                             <label>Research Category</label>
-                            <select>
-                                <option disabled selected>Select Category</option>
-                                <option>Computer Science</option>
-                                <option>Artificial Intelligence</option>
-                                <option>Data Science</option>
-                                <option>Engineering</option>
-                                <option>Management</option>
-                                <option>Biotechnology</option>
-                                <option>Blockchain & FinTech</option>
-                                <option>Cybersecurity</option>
-                                <option>Economics & Finance</option>
-                                <option>Environmental Science</option>
-                                <option>Mathematics</option>
-                                <option>Medical Sciences</option>
-                                <option>Physics</option>
-                                <option>Robotics</option>
-                                <option>Social Sciences</option>
-                                <option>Other / Interdisciplinary</option>
-                                <option>Digital Marketing Strategy</option>
-                                <option>Search Engine Optimization (SEO)</option>
-                                <option>Social Media Analytics</option>
-                                <option>E-Commerce & Retail Tech</option>
-                                <option>Content Marketing & Media</option>
-                                <option>UX/UI Design & Research</option>
-                                <option>Human-Computer Interaction (HCI)</option>
-                                <option>Visual Communication & Branding</option>
-                                <option>Graphic Design & Digital Art</option>
-                                <option>Product Design & Innovation</option>
-                            </select>
+                        <select>
+<option disabled selected>Select Category</option>
+
+<!-- Technology -->
+<option>Computer Science</option>
+<option>Artificial Intelligence</option>
+<option>Data Science</option>
+<option>Engineering</option>
+<option>Cybersecurity</option>
+<option>Blockchain & FinTech</option>
+<option>Robotics</option>
+
+<!-- Science -->
+<option>Mathematics</option>
+<option>Physics</option>
+<option>Biotechnology</option>
+<option>Environmental Science</option>
+<option>Medical Sciences</option>
+
+<!-- Business -->
+<option>Management</option>
+<option>Economics & Finance</option>
+<option>Digital Marketing Strategy</option>
+<option>Search Engine Optimization (SEO)</option>
+<option>Social Media Analytics</option>
+<option>E-Commerce & Retail Tech</option>
+<option>Content Marketing & Media</option>
+<option>Retail Management</option>
+
+<!-- Design -->
+<option>UX/UI Design & Research</option>
+<option>Human-Computer Interaction (HCI)</option>
+<option>Visual Communication & Branding</option>
+<option>Graphic Design & Digital Art</option>
+<option>Product Design & Innovation</option>
+
+<!-- Fashion -->
+<option>Fashion Design</option>
+<option>Fashion Technology</option>
+<option>Textile Design</option>
+<option>Sustainable Fashion</option>
+<option>Fashion Marketing & Merchandising</option>
+<option>Apparel Production & Manufacturing</option>
+<option>Fashion Communication</option>
+<option>Fashion Styling</option>
+<option>Luxury Fashion & Brand Management</option>
+<option>Fashion Retail Management</option>
+
+<!-- Social -->
+<option>Social Sciences</option>
+
+<option>Other / Interdisciplinary</option>
+</select>
                         </div>
 
                     </div>
@@ -765,111 +790,209 @@
     </script>
 
     <script src="assets/js/main.js"></script>
-    <script type="module">
-
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-        import { Client, Storage, ID } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.0/+esm";
 
 
-        /* FIREBASE */
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBUP1yGIwsCvc3uk8b_3RxJLhf08fIhR-s",
-            authDomain: "jnari-website.firebaseapp.com",
-            projectId: "jnari-website",
-            storageBucket: "jnari-website.firebasestorage.app",
-            messagingSenderId: "296384765818",
-            appId: "1:296384765818:web:90c1c195efc43d988cc0c3"
-        };
+    <div id="popupBox" style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+">
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        <div style="
+background:white;
+padding:30px;
+border-radius:10px;
+text-align:center;
+max-width:420px;
+">
+
+            <h3 id="popupTitle"></h3>
+            <p id="popupMsg"></p>
+
+            <button onclick="closePopup()" style="
+background:#33a88e;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:6px;
+margin-top:10px;
+cursor:pointer;
+">OK</button>
+
+        </div>
+    </div>
+
+    <script>
+        function showPopup(title, message) {
+
+            document.getElementById("popupTitle").innerText = title
+            document.getElementById("popupMsg").innerText = message
+            document.getElementById("popupBox").style.display = "flex"
+
+        }
+
+        function closePopup() {
+
+            document.getElementById("popupBox").style.display = "none"
+
+        }
+    </script>
 
 
-        /* APPWRITE */
+    <script>
 
-        const client = new Client();
-
-        client
-            .setEndpoint("https://cloud.appwrite.io/v1")
-            .setProject("69bce9240010a97785c2");
-
-        const storage = new Storage(client);
+        const supabaseUrl = "https://imqivfwfnjvlbvcmenki.supabase.co";
+        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltcWl2Zndmbmp2bGJ2Y21lbmtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTg4MDYsImV4cCI6MjA4OTU3NDgwNn0.na-q6d7FnqAoTe_2oAyW7idIfvorg8kCvxe8sHgD0rQ";
 
 
-        /* FORM */
+
+        console.log("Initializing Supabase...")
+
+        const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
+
+        console.log("Supabase client created")
 
         const form = document.getElementById("paperForm");
 
+   
+
+        
+
         form.addEventListener("submit", async (e) => {
 
-            e.preventDefault();
+            e.preventDefault()
+
+            console.log("===== PAPER SUBMISSION START =====")
 
             try {
 
-                const title = document.querySelector("input[placeholder='Enter research paper title']").value;
-                const category = document.querySelector("select").value;
-                const abstract = document.querySelector("textarea").value;
+                console.log("Reading form values...")
 
-                const author = document.querySelector("input[placeholder='Author Full Name']").value;
-                const email = document.querySelector("input[placeholder='author@email.com']").value;
-                const institution = document.querySelector("input[placeholder='University or Organization Name']").value;
-                const country = document.getElementById("country").value;
+                const title = document.querySelector("input[placeholder='Enter research paper title']").value
+                const category = document.querySelector("select").value
+                const abstract = document.querySelector("textarea").value
 
-                const file = document.querySelector("input[type='file']").files[0];
+                const author = document.querySelector("input[placeholder='Author Full Name']").value
+                const email = document.querySelector("input[placeholder='author@email.com']").value
+                const institution = document.querySelector("input[placeholder='University or Organization Name']").value
+                const country = document.getElementById("country").value
+
+                const file = document.querySelector("input[type='file']").files[0]
+
+                console.log("Title:", title)
+                console.log("Category:", category)
+                console.log("Author:", author)
+                console.log("Email:", email)
+                console.log("Institution:", institution)
+                console.log("Country:", country)
 
                 if (!file) {
-                    alert("Please upload research paper");
-                    return;
+
+                    console.log("No file selected")
+
+                    showPopup("Error", "Please upload research paper PDF")
+
+                    return
+
                 }
 
+                console.log("File selected:", file.name)
+                console.log("File size:", file.size)
 
-                /* Upload File */
+                console.log("Uploading PDF to Supabase Storage...")
 
-                const upload = await storage.createFile(
-                    "research-papers",
-                    ID.unique(),
-                    file
-                );
+                const fileName = Date.now() + "_" + file.name
 
+                console.log("Generated file name:", fileName)
 
-                /* Correct File URL */
+                /* UPLOAD FILE */
 
-                const fileUrl =
-                    `https://nyc.cloud.appwrite.io/v1/storage/buckets/research-papers/files/${upload.$id}/view?project=69bce9240010a97785c2`;
+                const { data: uploadData, error: uploadError } = await supabaseClient
+                    .storage
+                    .from("research-papers")
+                    .upload(fileName, file)
 
+                if (uploadError) {
 
-                /* Save Data to Firebase */
+                    console.log("Upload Error:", uploadError)
 
-                await addDoc(collection(db, "papers"), {
+                    showPopup("Upload Error", uploadError.message)
 
-                    title,
-                    category,
-                    abstract,
-                    author,
-                    email,
-                    institution,
-                    country,
-                    fileUrl,
-                    status: "Submitted",
-                    createdAt: new Date()
+                    return
 
-                });
+                }
 
-                alert("Paper submitted successfully!");
+                console.log("Upload Success:", uploadData)
 
-                form.reset();
+                const fileUrl = `${supabaseUrl}/storage/v1/object/public/research-papers/${fileName}`
 
-            } catch (error) {
+                console.log("Generated File URL:", fileUrl)
 
-                console.error("ERROR:", error);
-                alert(error.message);
+                console.log("Saving paper data to database...")
+
+                /* INSERT DATABASE */
+
+                const { data, error } = await supabaseClient
+                    .from("papers")
+                    .insert([{
+
+                        title: title,
+                        category: category,
+                        abstract: abstract,
+                        author: author,
+                        email: email,
+                        institution: institution,
+                        country: country,
+                        file_url: fileUrl,
+                        status: "Submitted"
+
+                    }])
+
+                if (error) {
+
+                    console.log("Database Insert Error:", error)
+
+                    showPopup("Database Error", error.message)
+
+                    return
+
+                }
+
+                console.log("Database Insert Success:", data)
+
+                console.log("Sending email notification...")
+
+                /* SEND EMAIL */
+
+     
+
+                console.log("Showing success popup")
+
+                showPopup("Success", "Research Paper Submitted Successfully!")
+
+                console.log("Resetting form")
+
+                form.reset()
+
+            } catch (err) {
+
+                console.log("Unexpected Error:", err)
+
+                showPopup("Error", err.message)
 
             }
 
-        });
+            console.log("===== PAPER SUBMISSION END =====")
+
+        })
 
     </script>
 </body>

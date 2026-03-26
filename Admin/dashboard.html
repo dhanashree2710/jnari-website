@@ -1,162 +1,524 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JNARI Full Admin System</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JNARI Admin Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{display:flex;background:#f3f7f6}
+       *{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
 
-.sidebar{width:250px;height:100vh;background:linear-gradient(180deg,#003d36,#009688);color:#fff;padding:20px;position:fixed}
-.sidebar h2{text-align:center;margin-bottom:30px}
-.sidebar ul{list-style:none}
-.sidebar ul li{padding:12px;margin-bottom:10px;border-radius:8px;cursor:pointer}
-.sidebar ul li:hover{background:rgba(255,255,255,0.2)}
+body{
+display:flex;
+background:#ffffff;
+color:#4a4b64;
+}
 
-.main{margin-left:250px;width:100%;padding:20px}
-.topbar{display:flex;justify-content:space-between;margin-bottom:20px}
+/* SIDEBAR */
 
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
-.card{padding:20px;border-radius:12px;color:#fff}
-.card1{background:#009688}
-.card2{background:#2196f3}
-.card3{background:#4caf50}
-.card4{background:#f44336}
+.sidebar{
 
-.section{margin-top:30px;background:#fff;padding:20px;border-radius:12px}
+width:240px;
+height:100vh;
+background:#272828;
+color:#ffffff;
+position:fixed;
 
-input,select{padding:10px;margin:5px;width:200px}
-button{padding:8px 12px;border:none;border-radius:6px;cursor:pointer}
+}
 
-.approve{background:#4caf50;color:#fff}
-.reject{background:#f44336;color:#fff}
+.sidebar h2{
 
-.status{padding:5px 10px;border-radius:5px;color:#fff}
-.pending{background:#ff9800}
-.accepted{background:#4caf50}
-.rejected{background:#f44336}
+text-align:center;
+padding:20px;
+border-bottom:1px solid #33a88e;
+color:#ffffff;
 
-table{width:100%;border-collapse:collapse;margin-top:10px}
-th,td{padding:10px;border-bottom:1px solid #eee}
-th{background:#009688;color:#fff}
+}
+
+.sidebar a{
+
+display:block;
+padding:14px 20px;
+color:#ffffff;
+text-decoration:none;
+transition:0.3s;
+
+}
+
+.sidebar a:hover{
+
+background:#33a88e;
+color:#ffffff;
+
+}
+
+/* MAIN */
+
+.main{
+
+margin-left:240px;
+padding:30px;
+width:100%;
+background:#ffffff;
+
+}
+
+/* HEADER */
+
+.header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+
+}
+
+.header h1{
+
+font-size:24px;
+color:#242859;
+
+}
+
+.profile{
+
+background:#ffffff;
+padding:8px 15px;
+border-radius:20px;
+border:1px solid #33a88e;
+color:#242859;
+
+}
+
+/* CARDS */
+
+.cards{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+
+}
+
+.card{
+
+background:#ffffff;
+padding:25px;
+border-radius:10px;
+border:1px solid #33a88e;
+transition:0.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-5px);
+border-color:#33a88e;
+
+}
+
+.card h3{
+
+font-size:30px;
+margin-bottom:10px;
+color:#242859;
+
+}
+
+.card p{
+
+color:#4a4b64;
+
+}
+
+/* ACTIVITY SECTION */
+
+.activity{
+
+margin-top:30px;
+background:#ffffff;
+padding:25px;
+border-radius:12px;
+border:1px solid #33a88e;
+
+}
+
+.activity-title{
+
+font-size:20px;
+font-weight:600;
+margin-bottom:20px;
+color:#242859;
+
+}
+
+/* TABLE */
+
+.table-container{
+
+overflow-x:auto;
+
+}
+
+table{
+
+width:100%;
+border-collapse:collapse;
+font-size:14px;
+
+}
+
+thead{
+
+background:#33a88e;
+color:#ffffff;
+
+}
+
+th{
+
+padding:14px;
+text-align:left;
+font-weight:500;
+
+}
+
+td{
+
+padding:14px;
+border-bottom:1px solid #33a88e;
+color:#4a4b64;
+
+}
+
+tr:hover{
+
+background:#ffffff;
+
+}
+
+/* STATUS */
+
+.status{
+
+padding:6px 12px;
+border-radius:20px;
+font-size:12px;
+font-weight:500;
+color:#ffffff;
+
+}
+
+.submitted{
+
+background:#33a88e;
+
+}
+
+.accepted{
+
+background:#33a88e;
+
+}
+
+.rejected{
+
+background:#272828;
+
+}
+
+.review{
+
+background:#242859;
+
+}
+
+/* DOWNLOAD BUTTON */
+
+.download-btn{
+
+background:#33a88e;
+color:#ffffff;
+border:none;
+padding:7px 14px;
+border-radius:6px;
+cursor:pointer;
+font-size:13px;
+transition:0.3s;
+
+}
+
+.download-btn:hover{
+
+background:#95eedb;
+
+}
 </style>
+
 </head>
+
 <body>
 
-<div class="sidebar">
-  <h2>JNARI</h2>
-  <ul>
-    <li>Dashboard</li>
-    <li>Submissions</li>
-    <li>Reviewers</li>
-    <li>Authors</li>
-    <li>Reports</li>
-  </ul>
-</div>
+    <!-- SIDEBAR -->
 
-<div class="main">
+    <div class="sidebar">
 
-<div class="topbar">
-  <h2>Admin Dashboard</h2>
-  <span>Welcome Admin</span>
-</div>
+        <h2>JNARI Admin</h2>
 
-<div class="cards">
-  <div class="card card1"><h3>Total</h3><p id="total">0</p></div>
-  <div class="card card2"><h3>Pending</h3><p id="pending">0</p></div>
-  <div class="card card3"><h3>Accepted</h3><p id="accepted">0</p></div>
-  <div class="card card4"><h3>Rejected</h3><p id="rejected">0</p></div>
-</div>
+        <a href="#">Dashboard</a>
+        <a href="submission.html">Submissions</a>
+        <a href="add_new_issuse.html">Add Issue</a>
+        <a href="reviewer-assignment.html">Reviewer Assignment</a>
+        <a href="discussion.html">Discussion</a>
+        <a href="current-issue.html">Current Issue</a>
+        <a href="publish-issue.html">Publish Issue</a>
+        <a href="archive.html">Archive</a>
+        <a href="reviewers.html">Reviewers</a>
+        <a href="settings.html">Settings</a>
+        <a href="logout.html">Logout</a>
 
-<div class="section">
-  <h3>Add Submission</h3>
-  <input id="author" placeholder="Author">
-  <input id="title" placeholder="Title">
-  <button onclick="addSubmission()">Submit</button>
-</div>
+    </div>
 
-<div class="section">
-  <h3>Manage Submissions</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Author</th>
-        <th>Title</th>
-        <th>Status</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody id="tableBody"></tbody>
-  </table>
-</div>
+    <!-- MAIN -->
 
-</div>
+    <div class="main">
 
-<script>
-// Firebase Config
-const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "YOUR_DOMAIN",
-  projectId: "YOUR_PROJECT_ID"
-};
+        <div class="header">
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+            <h1>Journal Dashboard</h1>
 
-// Add Submission
-function addSubmission(){
-  const author=document.getElementById('author').value;
-  const title=document.getElementById('title').value;
+            <div class="profile">
 
-  db.collection('submissions').add({
-    author,title,status:'Pending',created_at:new Date()
-  });
+                Admin Panel
+
+            </div>
+
+        </div>
+
+        <!-- STAT CARDS -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3 id="total">0</h3>
+                <p>Total Submissions</p>
+
+            </div>
+
+            <div class="card">
+
+                <h3 id="pending">0</h3>
+                <p>Pending Review</p>
+
+            </div>
+
+            <div class="card">
+
+                <h3 id="accepted">0</h3>
+                <p>Accepted Papers</p>
+
+            </div>
+
+            <div class="card">
+
+                <h3 id="rejected">0</h3>
+                <p>Rejected Papers</p>
+
+            </div>
+
+        </div>
+
+        <!-- RECENT ACTIVITY -->
+
+        <div class="activity">
+
+            <h2 class="activity-title">Recent Paper Submissions</h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Paper Title</th>
+                            <th>Author</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Download</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="recentTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script type="module">
+
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+        const supabase = createClient(
+            "https://imqivfwfnjvlbvcmenki.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltcWl2Zndmbmp2bGJ2Y21lbmtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTg4MDYsImV4cCI6MjA4OTU3NDgwNn0.na-q6d7FnqAoTe_2oAyW7idIfvorg8kCvxe8sHgD0rQ"
+
+        );
+
+
+async function loadDashboard(){
+
+const { data, error } = await supabase
+.from("papers")
+.select("*")
+.order("created_at", { ascending:false })
+
+if(error){
+console.log(error)
+return
 }
 
-// Load Data
-function loadData(){
-  db.collection('submissions').onSnapshot(snapshot=>{
-    let total=0,pending=0,accepted=0,rejected=0;
-    const table=document.getElementById('tableBody');
-    table.innerHTML='';
+let total = 0
+let pending = 0
+let accepted = 0
+let rejected = 0
 
-    snapshot.forEach(doc=>{
-      const d=doc.data();
-      total++;
-      if(d.status==='Pending')pending++;
-      if(d.status==='Accepted')accepted++;
-      if(d.status==='Rejected')rejected++;
+let tableHTML = ""
 
-      table.innerHTML+=`<tr>
-        <td>${d.author}</td>
-        <td>${d.title}</td>
-        <td><span class="status ${d.status.toLowerCase()}">${d.status}</span></td>
-        <td>
-          <button onclick="updateStatus('${doc.id}','Accepted')" class="approve">Approve</button>
-          <button onclick="updateStatus('${doc.id}','Rejected')" class="reject">Reject</button>
-        </td>
-      </tr>`;
-    });
+data.forEach(paper => {
 
-    document.getElementById('total').innerText=total;
-    document.getElementById('pending').innerText=pending;
-    document.getElementById('accepted').innerText=accepted;
-    document.getElementById('rejected').innerText=rejected;
-  });
+total++
+
+if(paper.status === "Submitted") pending++
+if(paper.status === "Accepted") accepted++
+if(paper.status === "Rejected") rejected++
+
+let statusClass = ""
+
+if(paper.status === "Submitted") statusClass = "submitted"
+if(paper.status === "Accepted") statusClass = "accepted"
+if(paper.status === "Rejected") statusClass = "rejected"
+if(paper.status === "Under Review") statusClass = "review"
+
+tableHTML += `
+
+<tr>
+
+<td>${paper.title}</td>
+
+<td>${paper.author}</td>
+
+<td>${new Date(paper.created_at).toLocaleDateString()}</td>
+
+<td>
+<span class="status ${statusClass}">
+${paper.status}
+</span>
+</td>
+
+<td>
+<a href="${paper.file_url}" target="_blank">
+<button class="download-btn">Download</button>
+</a>
+</td>
+
+</tr>
+
+`
+
+})
+
+/* UPDATE CARDS */
+
+document.getElementById("total").innerText = total
+document.getElementById("pending").innerText = pending
+document.getElementById("accepted").innerText = accepted
+document.getElementById("rejected").innerText = rejected
+
+/* UPDATE TABLE */
+
+document.getElementById("recentTable").innerHTML = tableHTML
+
 }
 
-// Update Status
-function updateStatus(id,status){
-  db.collection('submissions').doc(id).update({status});
+loadDashboard()
+
+
+
+async function loadRecentSubmissions(){
+
+const { data, error } = await supabase
+.from("papers")
+.select("*")
+.order("created_at", { ascending:false })
+.limit(6)
+
+let tableHTML = ""
+
+data.forEach(paper => {
+
+let statusClass = ""
+
+if(paper.status == "Submitted") statusClass = "submitted"
+if(paper.status == "Accepted") statusClass = "accepted"
+if(paper.status == "Rejected") statusClass = "rejected"
+if(paper.status == "Under Review") statusClass = "review"
+
+tableHTML += `
+
+<tr>
+
+<td>${paper.title}</td>
+
+<td>${paper.author}</td>
+
+<td>${new Date(paper.created_at).toLocaleDateString()}</td>
+
+<td>
+<span class="status ${statusClass}">
+${paper.status}
+</span>
+</td>
+
+<td>
+<a href="${paper.file_url}" target="_blank">
+<button class="download-btn">Download</button>
+</a>
+</td>
+
+</tr>
+
+`
+
+})
+
+document.getElementById("recentTable").innerHTML = tableHTML
+
 }
 
-loadData();
+loadRecentSubmissions()
+
 </script>
-
 </body>
+
 </html>

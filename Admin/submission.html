@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JNARI Admin - Submissions</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins;
+        }
+
+        body {
+            display: flex;
+            background: #ffffff;
+            color: #4a4b64;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 240px;
+            height: 100vh;
+            background: #272828;
+            color: #ffffff;
+            position: fixed;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #33a88e;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 14px 20px;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background: #33a88e;
+        }
+
+        /* MAIN */
+
+        .main {
+            margin-left: 240px;
+            padding: 40px;
+            width: 100%;
+        }
+
+        /* HEADER */
+
+        .page-header h1 {
+            color: #242859;
+            margin-bottom: 30px;
+        }
+
+        /* TABLE CONTAINER */
+
+        .submission-container {
+            background: #ffffff;
+            border-radius: 10px;
+            border: 1px solid #33a88e;
+            overflow: hidden;
+        }
+
+        /* TABLE */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #33a88e;
+            color: #ffffff;
+        }
+
+        th {
+            padding: 16px;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid #33a88e;
+            vertical-align: top;
+        }
+
+        /* PAPER INFO */
+
+        .paper-title {
+            font-weight: 600;
+            color: #242859;
+            margin-bottom: 6px;
+        }
+
+        .paper-category {
+            font-size: 13px;
+            color: #4a4b64;
+        }
+
+        /* AUTHOR */
+
+        .author-name {
+            font-weight: 500;
+            color: #242859;
+        }
+
+        .author-info {
+            font-size: 13px;
+            color: #4a4b64;
+        }
+
+        /* STATUS */
+
+        .status {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .submitted {
+            background: #33a88e;
+        }
+
+        .accepted {
+            background: #33a88e;
+        }
+
+        .rejected {
+            background: #272828;
+        }
+
+        /* BUTTONS */
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            border: none;
+            padding: 7px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .download-btn {
+            background: #242859;
+            color: #ffffff;
+        }
+
+        .accept-btn {
+            background: #33a88e;
+            color: #ffffff;
+        }
+
+        .reject-btn {
+            background: #272828;
+            color: #ffffff;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <h2>JNARI Admin</h2>
+
+     <a href="#">Dashboard</a>
+        <a href="submission.html">Submissions</a>
+        <a href="add_new_issuse.html">Add Issue</a>
+        <a href="reviewer-assignment.html">Reviewer Assignment</a>
+        <a href="discussion.html">Discussion</a>
+        <a href="current-issue.html">Current Issue</a>
+        <a href="publish-issue.html">Publish Issue</a>
+        <a href="archive.html">Archive</a>
+        <a href="reviewers.html">Reviewers</a>
+        <a href="settings.html">Settings</a>
+        <a href="logout.html">Logout</a>
+
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+        <div class="page-header">
+            <h1>Paper Submissions</h1>
+        </div>
+
+        <div class="submission-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Paper</th>
+                        <th>Author Details</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="paperTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+   <script type="module">
+
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+   const supabase = createClient(
+            "https://imqivfwfnjvlbvcmenki.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltcWl2Zndmbmp2bGJ2Y21lbmtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTg4MDYsImV4cCI6MjA4OTU3NDgwNn0.na-q6d7FnqAoTe_2oAyW7idIfvorg8kCvxe8sHgD0rQ"
+
+        );
+
+
+/* LOAD PAPERS */
+
+async function loadPapers(){
+
+const { data, error } = await supabase
+.from("papers")
+.select("*")
+.order("created_at",{ascending:false})
+
+let html=""
+
+data.forEach((paper,index)=>{
+
+let statusClass="submitted"
+
+if(paper.status==="Accepted") statusClass="accepted"
+if(paper.status==="Rejected") statusClass="rejected"
+
+html+=`
+
+<tr>
+
+<td>
+<div class="paper-title">${paper.title}</div>
+<div class="paper-category">${paper.category}</div>
+</td>
+
+<td>
+<div class="author-name">${paper.author}</div>
+<div class="author-info">${paper.institution}</div>
+<div class="author-info">${paper.email}</div>
+</td>
+
+<td>
+${new Date(paper.created_at).toLocaleDateString()}
+</td>
+
+<td>
+<span class="status ${statusClass}">
+${paper.status}
+</span>
+</td>
+
+<td>
+
+<div class="action-buttons">
+
+<a href="${paper.file_url}" target="_blank">
+<button class="btn download-btn">Download</button>
+</a>
+
+${paper.status === "Submitted" ? `
+<button class="btn accept-btn" onclick="acceptPaper(${paper.id})">Accept</button>
+<button class="btn reject-btn" onclick="rejectPaper(${paper.id})">Reject</button>
+` : ""}
+
+${paper.status === "Accepted" ? `
+<a href="add_paper_to_issuse.html?paper_id=${paper.id}">
+<button class="btn accept-btn">Add To Issue</button>
+</a>
+` : ""}
+
+${paper.status === "Rejected" ? `
+<span style="color:#272828;font-weight:500;">Rejected</span>
+` : ""}
+
+</div>
+
+</td>
+
+</tr>
+
+`
+
+})
+
+document.getElementById("paperTable").innerHTML=html
+
+}
+
+
+/* ACCEPT PAPER */
+
+window.acceptPaper=async(id)=>{
+
+await supabase
+.from("papers")
+.update({status:"Accepted"})
+.eq("id",id)
+
+loadPapers()
+
+}
+
+
+/* REJECT PAPER */
+
+window.rejectPaper=async(id)=>{
+
+await supabase
+.from("papers")
+.update({status:"Rejected"})
+.eq("id",id)
+
+loadPapers()
+
+}
+
+loadPapers()
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JNARI Admin - Manage Issues</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
+body{
+background:#f4f6fb;
+color:#4a4b64;
+display:flex;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:240px;
+height:100vh;
+background:#272828;
+color:white;
+position:fixed;
+left:0;
+top:0;
+}
+
+.sidebar h2{
+text-align:center;
+padding:20px;
+border-bottom:1px solid #33a88e;
+}
+
+.sidebar a{
+display:block;
+padding:14px 20px;
+color:white;
+text-decoration:none;
+transition:0.3s;
+}
+
+.sidebar a:hover{
+background:#33a88e;
+}
+
+/* MAIN CONTENT */
+
+.main{
+margin-left:240px;
+padding:40px;
+width:100%;
+}
+
+/* HEADER */
+
+.header{
+margin-bottom:30px;
+}
+
+.header h1{
+color:#242859;
+}
+
+.header p{
+color:#666;
+font-size:14px;
+}
+
+/* CONTAINER */
+
+.container{
+display:flex;
+gap:30px;
+flex-wrap:wrap;
+}
+
+/* CARD */
+
+.card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
+flex:1;
+min-width:350px;
+}
+
+/* FORM */
+
+input{
+width:100%;
+padding:12px;
+border-radius:6px;
+border:1px solid #ccc;
+margin-bottom:15px;
+}
+
+button{
+background:#33a88e;
+color:white;
+border:none;
+padding:10px 18px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+opacity:.9;
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:12px;
+border-bottom:1px solid #eee;
+text-align:left;
+}
+
+th{
+background:#f7f8fc;
+}
+
+.delete{
+background:#ef4444;
+padding:6px 10px;
+border:none;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+.popup{
+position:fixed;
+top:20px;
+right:20px;
+background:#33a88e;
+color:white;
+padding:12px 18px;
+border-radius:6px;
+font-size:14px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+display:none;
+z-index:1000;
+animation:fadeIn .3s ease;
+}
+
+.popup.error{
+background:#ef4444;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(-10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>JNARI Admin</h2>
+
+<a href="#">Dashboard</a>
+<a href="submission.html">Submissions</a>
+<a href="add_new_issuse.html">Add Issue</a>
+<a href="reviewer-assignment.html">Reviewer Assignment</a>
+<a href="discussion.html">Discussion</a>
+<a href="current-issue.html">Current Issue</a>
+<a href="publish-issue.html">Publish Issue</a>
+<a href="archive.html">Archive</a>
+<a href="reviewers.html">Reviewers</a>
+<a href="settings.html">Settings</a>
+<a href="logout.html">Logout</a>
+
+</div>
+
+
+<!-- MAIN CONTENT -->
+
+<div class="main">
+
+<div class="header">
+<h1>Manage Journal Issues</h1>
+<p>Create and manage journal volumes/issues.</p>
+</div>
+
+<div class="container">
+
+<!-- CREATE ISSUE -->
+
+<div class="card">
+
+<h3 style="margin-bottom:15px;">Create New Issue</h3>
+
+<input type="text" id="issueName" placeholder="Example: 2026 - Volume 28 [Issue 3]">
+
+<button onclick="createIssue()">Create Issue</button>
+
+</div>
+
+
+<!-- ISSUE LIST -->
+
+<div class="card">
+
+<h3 style="margin-bottom:15px;">Existing Issues</h3>
+
+<table>
+
+<thead>
+<tr>
+<th>#</th>
+<th>Issue Name</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="issueTable">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+<div id="popupMsg" class="popup"></div>
+
+<script type="module">
+
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+const supabase = createClient(
+"https://imqivfwfnjvlbvcmenki.supabase.co",
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltcWl2Zndmbmp2bGJ2Y21lbmtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTg4MDYsImV4cCI6MjA4OTU3NDgwNn0.na-q6d7FnqAoTe_2oAyW7idIfvorg8kCvxe8sHgD0rQ"
+)
+
+
+/* POPUP FUNCTION */
+
+function showPopup(message,type="success"){
+
+const popup=document.getElementById("popupMsg")
+
+popup.innerText=message
+
+popup.className="popup"
+
+if(type==="error"){
+popup.classList.add("error")
+}
+
+popup.style.display="block"
+
+setTimeout(()=>{
+popup.style.display="none"
+},3000)
+
+}
+
+
+/* LOAD ISSUES */
+
+async function loadIssues(){
+
+const { data } = await supabase
+.from("issues")
+.select("*")
+.order("created_at",{ascending:false})
+
+let html=""
+
+data.forEach((issue,index)=>{
+
+html+=`
+
+<tr>
+
+<td>${index+1}</td>
+
+<td>${issue.issue_name}</td>
+
+<td>
+<button class="delete" onclick="deleteIssue(${issue.id})">
+Delete
+</button>
+</td>
+
+</tr>
+
+`
+
+})
+
+document.getElementById("issueTable").innerHTML = html
+
+}
+
+loadIssues()
+
+
+/* CREATE ISSUE */
+
+window.createIssue = async ()=>{
+
+const issueName=document.getElementById("issueName").value
+
+if(issueName===""){
+showPopup("Please enter issue name","error")
+return
+}
+
+await supabase
+.from("issues")
+.insert([{issue_name:issueName}])
+
+showPopup("Issue created successfully")
+
+document.getElementById("issueName").value=""
+
+loadIssues()
+
+}
+
+
+/* DELETE ISSUE */
+
+window.deleteIssue = async(id)=>{
+
+if(!confirm("Delete this issue?")) return
+
+await supabase
+.from("issues")
+.delete()
+.eq("id",id)
+
+showPopup("Issue deleted")
+
+loadIssues()
+
+}
+
+</script>
+
+</body>
+</html>

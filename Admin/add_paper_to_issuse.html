@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JNARI Admin - Add Paper To Issue</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
+body{
+background:#f4f6fb;
+display:flex;
+color:#4a4b64;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:240px;
+height:100vh;
+background:#272828;
+color:white;
+position:fixed;
+}
+
+.sidebar h2{
+text-align:center;
+padding:20px;
+border-bottom:1px solid #33a88e;
+}
+
+.sidebar a{
+display:block;
+padding:14px 20px;
+color:white;
+text-decoration:none;
+transition:.3s;
+}
+
+.sidebar a:hover{
+background:#33a88e;
+}
+
+/* MAIN CONTENT */
+
+.main{
+margin-left:240px;
+width:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+/* CARD */
+
+.container{
+background:white;
+width:600px;
+padding:35px;
+border-radius:12px;
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+
+.header{
+margin-bottom:25px;
+}
+
+.header h2{
+color:#242859;
+font-weight:600;
+}
+
+.header p{
+font-size:14px;
+color:#666;
+margin-top:5px;
+}
+
+/* PAPER BOX */
+
+.paper-box{
+background:#f7f8fc;
+border:1px solid #e6e8f0;
+padding:15px;
+border-radius:8px;
+margin-bottom:20px;
+}
+
+.paper-title{
+font-weight:600;
+color:#242859;
+margin-bottom:5px;
+}
+
+.paper-author{
+font-size:14px;
+color:#555;
+}
+
+/* SELECT */
+
+label{
+font-size:14px;
+font-weight:500;
+}
+
+select{
+width:100%;
+padding:12px;
+margin-top:8px;
+margin-bottom:25px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+/* BUTTONS */
+
+.buttons{
+display:flex;
+justify-content:flex-end;
+gap:10px;
+}
+
+.btn{
+padding:10px 18px;
+border-radius:6px;
+border:none;
+cursor:pointer;
+}
+
+.cancel{
+background:#eee;
+}
+
+.add{
+background:#33a88e;
+color:white;
+}
+
+.add:hover{
+background:#2a9079;
+}
+
+/* POPUP */
+
+.popup{
+position:fixed;
+top:20px;
+right:20px;
+background:#33a88e;
+color:white;
+padding:12px 18px;
+border-radius:6px;
+font-size:14px;
+box-shadow:0 4px 12px rgba(0,0,0,0.2);
+display:none;
+z-index:1000;
+}
+
+.popup.error{
+background:#ef4444;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>JNARI Admin</h2>
+
+<a href="#">Dashboard</a>
+<a href="submission.html">Submissions</a>
+<a href="add_new_issuse.html">Add Issue</a>
+<a href="reviewer-assignment.html">Reviewer Assignment</a>
+<a href="discussion.html">Discussion</a>
+<a href="current-issue.html">Current Issue</a>
+<a href="publish-issue.html">Publish Issue</a>
+<a href="archive.html">Archive</a>
+<a href="reviewers.html">Reviewers</a>
+<a href="settings.html">Settings</a>
+<a href="logout.html">Logout</a>
+
+</div>
+
+
+<!-- MAIN CONTENT -->
+
+<div class="main">
+
+<div class="container">
+
+<div class="header">
+<h2>Add Paper To Issue</h2>
+<p>Select the volume/issue where this paper will be published.</p>
+</div>
+
+<div class="paper-box">
+<div id="paperTitle" class="paper-title"></div>
+<div id="paperAuthor" class="paper-author"></div>
+</div>
+
+<label>Select Issue / Volume</label>
+
+<select id="issueSelect">
+<option value="">Select Issue</option>
+</select>
+
+<div class="buttons">
+<button class="btn cancel" onclick="goBack()">Cancel</button>
+<button class="btn add" onclick="assignIssue()">Add To Issue</button>
+</div>
+
+</div>
+
+</div>
+
+<!-- POPUP -->
+
+<div id="popupMsg" class="popup"></div>
+
+
+<script type="module">
+
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+  const supabase = createClient(
+            "https://imqivfwfnjvlbvcmenki.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltcWl2Zndmbmp2bGJ2Y21lbmtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTg4MDYsImV4cCI6MjA4OTU3NDgwNn0.na-q6d7FnqAoTe_2oAyW7idIfvorg8kCvxe8sHgD0rQ"
+
+        );
+
+
+/* POPUP */
+
+function showPopup(message,type="success"){
+
+const popup=document.getElementById("popupMsg")
+
+popup.innerText=message
+
+popup.className="popup"
+
+if(type==="error"){
+popup.classList.add("error")
+}
+
+popup.style.display="block"
+
+setTimeout(()=>{
+popup.style.display="none"
+},3000)
+
+}
+
+
+/* GET PAPER ID */
+
+const urlParams=new URLSearchParams(window.location.search)
+const paperId=urlParams.get("paper_id")
+
+
+/* LOAD PAPER */
+
+async function loadPaper(){
+
+const { data } = await supabase
+.from("papers")
+.select("*")
+.eq("id",paperId)
+.single()
+
+document.getElementById("paperTitle").innerText=data.title
+document.getElementById("paperAuthor").innerText="Author: "+data.author
+
+}
+
+loadPaper()
+
+
+/* LOAD ISSUES */
+
+async function loadIssues(){
+
+const { data } = await supabase
+.from("issues")
+.select("*")
+
+let html=""
+
+data.forEach(issue=>{
+
+html+=`<option value="${issue.id}">${issue.issue_name}</option>`
+
+})
+
+document.getElementById("issueSelect").innerHTML+=html
+
+}
+
+loadIssues()
+
+
+/* ASSIGN ISSUE */
+
+window.assignIssue = async ()=>{
+
+const issueId=document.getElementById("issueSelect").value
+
+if(issueId===""){
+showPopup("Please select issue","error")
+return
+}
+
+await supabase
+.from("papers")
+.update({issue_id:issueId})
+.eq("id",paperId)
+
+showPopup("Paper added to issue successfully")
+
+setTimeout(()=>{
+window.location.href="submissions.html"
+},1500)
+
+}
+
+
+/* CANCEL */
+
+window.goBack=()=>{
+
+window.location.href="submissions.html"
+
+}
+
+</script>
+
+</body>
+</html>

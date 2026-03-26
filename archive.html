@@ -35,39 +35,47 @@
   
   
 <style>
-    /* Under Process Section */
-    .under-process-section {
-        display: flex;
-        justify-content: center; /* Center horizontally */
-        align-items: center;     /* Center vertically */
-        flex-direction: column;  /* Stack image and text */
-        padding: 100px 20px;     /* Space around section */
-        background-color: #f9f9f9; /* Light background */
-        text-align: center;
-    }
+.archive-section{
+padding:80px 0;
+background:#f9fafc;
+}
 
-    .under-process-section img {
-        max-width: 400px; /* Image width */
-        width: 100%;      /* Responsive */
-        height: auto;
-        margin-bottom: 20px;
-    }
+.archive-title{
+font-size:28px;
+font-weight:600;
+margin-bottom:30px;
+color:#065e4b;
+text-align:center;
+}
 
-    .under-process-section .under-process-text {
-        font-size: 18px;
-        color: #065e4b; /* Matching JNARI color */
-        font-weight: 500;
-    }
+.archive-list{
+background:white;
+border-radius:8px;
+box-shadow:0 4px 15px rgba(0,0,0,0.05);
+padding:30px;
+max-width:900px;
+margin:auto;
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .under-process-section {
-            padding: 60px 10px;
-        }
-        .under-process-section .under-process-text {
-            font-size: 16px;
-        }
-    }
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+}
+
+.archive-item{
+flex:0 0 auto;
+}
+
+.archive-item a{
+text-decoration:none;
+color:#33a88e;
+font-size:17px;
+font-weight:600;
+}
+
+.archive-item a:hover{
+color:#065e4b;
+text-decoration:underline;
+}
 </style>
 </head>
 
@@ -172,13 +180,15 @@
     </header>
     <main class="main">
 
-     <!-- Under Process Section -->
-    <section class="under-process-section">
-        <div class="container">
-            <img src="assets/img/under_process.png" alt="Under Process">
-            <p class="under-process-text">This section is currently under process. Please check back later.</p>
-        </div>
-    </section>
+    <section class="archive-section">
+
+
+    <h2 class="archive-title">Archives</h2>
+
+    <div id="archiveList" class="archive-list"></div>
+
+
+</section>
 
     
     </main>
@@ -460,6 +470,58 @@
     </script>
 
     <script src="assets/js/main.js"></script>
+
+    <script type="module">
+
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+const supabase = createClient(
+"https://imqivfwfnjvlbvcmenki.supabase.co",
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltcWl2Zndmbmp2bGJ2Y21lbmtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTg4MDYsImV4cCI6MjA4OTU3NDgwNn0.na-q6d7FnqAoTe_2oAyW7idIfvorg8kCvxe8sHgD0rQ"
+);
+
+
+/* LOAD ARCHIVES */
+
+async function loadArchives(){
+
+const { data, error } = await supabase
+.from("issues")
+.select("*")
+.order("issue_name",{ascending:false})
+
+if(error){
+console.log(error)
+return
+}
+
+let html=""
+
+data.forEach(issue=>{
+
+html+=`
+
+<div class="archive-item">
+
+<i class="bi bi-journal-text archive-icon"></i>
+
+<a href="issuse_paper.html?issue_id=${issue.id}">
+${issue.issue_name}
+</a>
+
+</div>
+
+`
+
+})
+
+document.getElementById("archiveList").innerHTML = html
+
+}
+
+loadArchives()
+
+</script>
 
 </body>
 

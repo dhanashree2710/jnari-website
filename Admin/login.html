@@ -370,84 +370,109 @@
 
     const supabaseUrl = "https://imqivfwfnjvlbvcmenki.supabase.co";
     const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltcWl2Zndmbmp2bGJ2Y21lbmtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTg4MDYsImV4cCI6MjA4OTU3NDgwNn0.na-q6d7FnqAoTe_2oAyW7idIfvorg8kCvxe8sHgD0rQ";
-  
-  // Create Supabase client
-  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-  // Popup function
-  function showPopup(type, message){
-    const overlay = document.getElementById("popupOverlay");
-    const icon = document.getElementById("popupIcon");
-    const title = document.getElementById("popupTitle");
-    const msg = document.getElementById("popupMessage");
+    // Create Supabase client
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-    overlay.classList.add("show");
+    // Popup function
+    function showPopup(type, message) {
+      const overlay = document.getElementById("popupOverlay");
+      const icon = document.getElementById("popupIcon");
+      const title = document.getElementById("popupTitle");
+      const msg = document.getElementById("popupMessage");
 
-    if(type === "success"){
-      icon.innerHTML = '<i class="bi bi-check-circle-fill popup-success"></i>';
-      title.innerText = "Login Successful";
-      msg.innerText = message;
-    }
-    if(type === "error"){
-      icon.innerHTML = '<i class="bi bi-x-circle-fill popup-error"></i>';
-      title.innerText = "Login Failed";
-      msg.innerText = message;
-    }
-  }
+      overlay.classList.add("show");
 
-  function closePopup(){
-    document.getElementById("popupOverlay").classList.remove("show");
-  }
-
-  // Login form
-  const form = document.getElementById("loginForm");
-
-  form.addEventListener("submit", async (e)=>{
-    e.preventDefault();
-
-    const emailInput = document.getElementById("email").value.trim().toLowerCase();
-    const passwordInput = document.getElementById("password").value.trim();
-
-    console.log("Input Email:", emailInput);
-    console.log("Input Password:", passwordInput);
-
-    try {
-      // Fetch all admin users (robust method)
-      const { data, error } = await supabaseClient
-        .from("admin")
-        .select("*");
-
-      if(error) throw error;
-
-      console.log("Supabase admin rows:", data);
-
-      // Find user by email (case-insensitive)
-      const user = data.find(u => u.email.trim().toLowerCase() === emailInput);
-
-      if(user){
-        console.log("User fetched from DB:", user);
-
-        if(user.password === passwordInput){
-          console.log("Password matched!");
-          showPopup("success","Welcome Admin!");
-          setTimeout(()=>{ window.location.href="dashboard.html"; }, 1500);
-        } else {
-          console.log("Password mismatch:", user.password, passwordInput);
-          showPopup("error","Invalid Email or Password");
-        }
-
-      } else {
-        console.log("No user found with this email");
-        showPopup("error","Invalid Email or Password");
+      if (type === "success") {
+        icon.innerHTML = '<i class="bi bi-check-circle-fill popup-success"></i>';
+        title.innerText = "Login Successful";
+        msg.innerText = message;
       }
-
-    } catch(err){
-      console.log("Caught Error:", err);
-      showPopup("error", err.message);
+      if (type === "error") {
+        icon.innerHTML = '<i class="bi bi-x-circle-fill popup-error"></i>';
+        title.innerText = "Login Failed";
+        msg.innerText = message;
+      }
     }
 
-  });
-</script>
+    function closePopup() {
+      document.getElementById("popupOverlay").classList.remove("show");
+    }
+
+    // Login form
+    const form = document.getElementById("loginForm");
+
+    form.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  console.log("===== LOGIN PROCESS STARTED =====");
+
+  const emailInput = document.getElementById("email").value.trim().toLowerCase();
+  const passwordInput = document.getElementById("password").value.trim();
+
+  console.log("Entered Email:", emailInput);
+  console.log("Entered Password:", passwordInput);
+
+  try {
+
+    console.log("Connecting to Supabase...");
+
+    const { data, error } = await supabaseClient
+      .from("admin")
+      .select("*")
+      .eq("email", emailInput)
+      .single();
+
+    console.log("Supabase Response Data:", data);
+    console.log("Supabase Error:", error);
+
+    if (error) {
+      console.log("Database error occurred");
+      showPopup("error", error.message);
+      return;
+    }
+
+    if (!data) {
+      console.log("No admin found with this email");
+      showPopup("error", "Invalid Email or Password");
+      return;
+    }
+
+    console.log("Admin record found:", data);
+
+    if (data.password === passwordInput) {
+
+      console.log("Password matched. Login successful.");
+
+      showPopup("success", "Welcome Admin!");
+
+      setTimeout(() => {
+        console.log("Redirecting to dashboard...");
+        window.location.href = "dashboard.html";
+      }, 1500);
+
+    } else {
+
+      console.log("Password mismatch!");
+      console.log("DB Password:", data.password);
+      console.log("Entered Password:", passwordInput);
+
+      showPopup("error", "Invalid Email or Password");
+
+    }
+
+  } catch (err) {
+
+    console.log("Unexpected error occurred:", err);
+    showPopup("error", err.message);
+
+  }
+
+  console.log("===== LOGIN PROCESS FINISHED =====");
+
+});
+  </script>
 </body>
 
 </html>

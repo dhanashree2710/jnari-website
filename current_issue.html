@@ -32,43 +32,64 @@
     <!-- Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
     <!-- CSS -->
-  
-  
-<style>
-    /* Under Process Section */
-    .under-process-section {
-        display: flex;
-        justify-content: center; /* Center horizontally */
-        align-items: center;     /* Center vertically */
-        flex-direction: column;  /* Stack image and text */
-        padding: 100px 20px;     /* Space around section */
-        background-color: #f9f9f9; /* Light background */
-        text-align: center;
-    }
 
-    .under-process-section img {
-        max-width: 400px; /* Image width */
-        width: 100%;      /* Responsive */
-        height: auto;
-        margin-bottom: 20px;
-    }
 
-    .under-process-section .under-process-text {
-        font-size: 18px;
-        color: #065e4b; /* Matching JNARI color */
-        font-weight: 500;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .under-process-section {
-            padding: 60px 10px;
+    <style>
+        .current-issue {
+            max-width: 900px;
+            margin: 60px auto;
+            /* 60px top & bottom, auto left & right */
+            padding: 35px;
+            background: #f7f7f7;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         }
-        .under-process-section .under-process-text {
-            font-size: 16px;
+
+        #issueTitle {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #33a88e;
         }
-    }
-</style>
+
+        .paper {
+            padding: 20px 0;
+            border-top: 1px solid #33a88e;
+        }
+
+        .article-type {
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .paper-title {
+            color: #33a88e;
+            font-weight: 600;
+            font-size: 17px;
+        }
+
+        .author {
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .btn-group button {
+            background: #33a88e;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            margin-right: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn-group button:hover {
+            background: #23856f;
+        }
+    </style>
 </head>
 
 <body class="index-page">
@@ -139,10 +160,10 @@
                     </li>
 
                     <!-- JOURNALS -->
-                   
-        
-              <li><a href="current_issue.html">Current Issue</a></li>
-              <li><a href="archive.html">Archive</a></li>
+
+
+                    <li><a href="current_issue.html">Current Issue</a></li>
+                    <li><a href="archive.html">Archive</a></li>
 
                     <!-- RESEARCH -->
                     <li class="dropdown">
@@ -172,15 +193,17 @@
     </header>
     <main class="main">
 
-     <!-- Under Process Section -->
-    <section class="under-process-section">
-        <div class="container">
-            <img src="assets/img/under_process.png" alt="Under Process">
-            <p class="under-process-text">This section is currently under process. Please check back later.</p>
-        </div>
-    </section>
+        <section class="current-issue">
 
-    
+            <h2>Current Issue</h2>
+
+            <div id="issueTitle"></div>
+
+            <div id="paperList"></div>
+
+        </section>
+
+
     </main>
 
 
@@ -460,7 +483,96 @@
     </script>
 
     <script src="assets/js/main.js"></script>
+    <script type="module">
 
+        import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"
+
+        const supabase = createClient(
+            "https://imqivfwfnjvlbvcmenki.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltcWl2Zndmbmp2bGJ2Y21lbmtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTg4MDYsImV4cCI6MjA4OTU3NDgwNn0.na-q6d7FnqAoTe_2oAyW7idIfvorg8kCvxe8sHgD0rQ"
+        )
+
+
+        async function loadCurrentIssue() {
+
+            /* GET LATEST ISSUE */
+
+            const { data: issues, error } = await supabase
+                .from("issues")
+                .select("*")
+                .order("created_at", { ascending: false })
+                .limit(1)
+
+            if (error || !issues || issues.length === 0) {
+                document.getElementById("issueTitle").innerHTML = "No Current Issue Available"
+                return
+            }
+
+            const issue = issues[0]
+
+            document.getElementById("issueTitle").innerHTML = issue.issue_name
+
+
+            /* GET PAPERS OF THAT ISSUE */
+
+            const { data: papers } = await supabase
+                .from("papers")
+                .select("*")
+                .eq("issue_id", issue.id)
+
+            if (!papers || papers.length === 0) {
+
+                document.getElementById("paperList").innerHTML = `
+<div class="no-paper">
+No Papers Published in this Issue
+</div>
+`
+
+                return
+            }
+
+            let html = ""
+
+            papers.forEach(paper => {
+
+                html += `
+
+<div class="paper">
+
+<div class="paper-title">
+${paper.title}
+</div>
+
+<div class="author">
+${paper.author}
+</div>
+
+<div class="btn-group">
+
+<button onclick="window.open('${paper.file_url}','_blank')">
+Full Article - PDF
+</button>
+
+<button>Review History</button>
+
+<button>Discussion</button>
+
+</div>
+
+</div>
+
+`
+
+            })
+
+            document.getElementById("paperList").innerHTML = html
+
+        }
+
+        loadCurrentIssue()
+
+
+    </script>
 </body>
 
 </html>
