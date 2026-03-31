@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Journal of National Academic Research and Innovation</title>
+    <title>Journal of International Academic Research and Innovation</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -31,153 +31,154 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
-  <!-- CSS -->
-<style>
-.editorial-board {
-    padding: 80px 20px;
-   /* background: linear-gradient(180deg, #f0f9f8 0%, #e0f7f5 100%);*/
-   background: #fff;
-    font-family: 'Inter', sans-serif;
-    position: relative;
-    overflow: hidden;
-}
+    <!-- CSS -->
+    <style>
+        .editorial-board {
+            padding: 80px 20px;
+            /* background: linear-gradient(180deg, #f0f9f8 0%, #e0f7f5 100%);*/
+            background: #fff;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
 
-.editorial-board::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at center, rgba(0,121,107,0.05) 0%, transparent 70%);
-    z-index: 0;
-}
+        .editorial-board::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(0, 121, 107, 0.05) 0%, transparent 70%);
+            z-index: 0;
+        }
 
-.editorial-board .section-header {
-    text-align: center;
-    margin-bottom: 50px;
-    position: relative;
-    z-index: 1;
-}
+        .editorial-board .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
+        }
 
-.editorial-board h2 {
-    font-size: 2.8rem;
-    color: #004d40;
-    font-weight: 700;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 10px;
-}
+        .editorial-board h2 {
+            font-size: 2.8rem;
+            color: #004d40;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
 
-.editorial-board h2::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(90deg, #26a69a, #00796b);
-    margin: 8px auto 0;
-    border-radius: 2px;
-}
+        .editorial-board h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #26a69a, #00796b);
+            margin: 8px auto 0;
+            border-radius: 2px;
+        }
 
-.editorial-board p {
-    color: #555;
-    font-size: 1rem;
-    max-width: 650px;
-    margin: 10px auto 0;
-}
+        .editorial-board p {
+            color: #555;
+            font-size: 1rem;
+            max-width: 650px;
+            margin: 10px auto 0;
+        }
 
-.editorial-board h3 {
-    font-size: 2rem;
-    color: #00796b;
-    margin-bottom: 30px;
-    text-align: center;
-}
+        .editorial-board h3 {
+            font-size: 2rem;
+            color: #00796b;
+            margin-bottom: 30px;
+            text-align: center;
+        }
 
-.card {
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 25px 20px 30px 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    transition: transform 0.4s, box-shadow 0.4s, background 0.4s;
-    position: relative;
-    overflow: hidden;
-}
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 25px 20px 30px 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s, box-shadow 0.4s, background 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
 
-.card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(135deg, rgba(38,166,154,0.05), rgba(0,121,107,0.05));
-    transform: rotate(25deg);
-    z-index: 0;
-}
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(135deg, rgba(38, 166, 154, 0.05), rgba(0, 121, 107, 0.05));
+            transform: rotate(25deg);
+            z-index: 0;
+        }
 
-.card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-    background: #f1fdfb;
-     border: 2px solid #00796b; /* Colored border on hover */
-}
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            background: #f1fdfb;
+            border: 2px solid #00796b;
+            /* Colored border on hover */
+        }
 
 
-.chief-editor {
-    max-width: 700px;
-    margin: 0 auto 60px;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-}
+        .chief-editor {
+            max-width: 700px;
+            margin: 0 auto 60px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
 
-.members-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-}
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
 
-.member {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-}
+        .member {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
 
-.member h4 {
-    color: #00796b;
-    margin-bottom: 8px;
-    font-size: 1.3rem;
-    font-weight: 600;
-}
+        .member h4 {
+            color: #00796b;
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
 
-.member p {
-    color: #555;
-    font-size: 0.95rem;
-    margin-bottom: 6px;
-}
+        .member p {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
 
-.member a {
-    color: #00796b;
-    text-decoration: none;
-    font-weight: 500;
-}
+        .member a {
+            color: #00796b;
+            text-decoration: none;
+            font-weight: 500;
+        }
 
-.member a:hover {
-    text-decoration: underline;
-}
+        .member a:hover {
+            text-decoration: underline;
+        }
 
-.member::before {
-    content: '';
-    display: block;
-    width: 70px;
-    height: 70px;
-    background: linear-gradient(135deg, #26a69a, #00796b);
-    border-radius: 50%;
-    margin: 0 auto 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    position: relative;
-}
-</style>
+        .member::before {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #26a69a, #00796b);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+    </style>
 </head>
 
 <body class="index-page">
@@ -204,7 +205,7 @@
                 </div>
 
                 <div class="journal-title">
-                    <h1>Journal of National Academic Research and Innovation (JNARI)</h1>
+                    <h1>Journal of International Academic Research and Innovation (JIARI)</h1>
 
                     <!-- <p class="journal-subtitle">
         (Double Blind Peer Review Open Access Research Journal)
@@ -248,10 +249,10 @@
                     </li>
 
                     <!-- JOURNALS -->
-                   
-        
-              <li><a href="current_issue.html">Current Issue</a></li>
-              <li><a href="archive.html">Archive</a></li>
+
+
+                    <li><a href="current_issue.html">Current Issue</a></li>
+                    <li><a href="archive.html">Archive</a></li>
 
                     <!-- RESEARCH -->
                     <li class="dropdown">
@@ -281,96 +282,142 @@
     </header>
     <main class="main">
 
-      <!-- Editorial Board Section -->
-<section class="editorial-board">
-  <div class="container">
-    <div class="section-header">
-      <h2>Editorial Board</h2>
-      <p>Meet our distinguished editorial members who guide and oversee our journal.</p>
-    </div>
+        <!-- Editorial Board Section -->
+        <section class="editorial-board">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Editorial Board</h2>
+                    <p>Meet our distinguished editorial members who guide and oversee our journal.</p>
+                </div>
 
-    <!-- Editor In Chief -->
-    <div class="chief-editor card">
-      <h3>Editor In Chief</h3>
-      <h4>Rushikesh Y Hiwale</h4>
-      <p><strong>Designation:</strong> Head Of Department</p>
-      <p><strong>College & Address:</strong> PDEA's Baburaoji Gholap College, Sangvi, Pune - 411023</p>
-      <p><strong>Email:</strong> <a href="mailto:rushikesh.hiwale@smmm.org.in">rushikesh.hiwale@smmm.org.in</a></p>
-      <p><strong>Mobile:</strong> 09096883042</p>
-    </div>
+                <!-- Editor In Chief -->
+                <div class="chief-editor card">
+                    <h3>Editor In Chief</h3>
+                    <h4>Dr. Mahendra Ramchandra Avaghade</h4>
+                    <p><strong>Designation:</strong> Ex. Principal</p>
+                    <p><strong>College & Address:</strong> Annasaheb Waghire College, Otur, India</p>
+                    <p><strong>Email:</strong> <a
+                            href="mailto:rushikesh.hiwale@smmm.org.in">dravaghademr@gmail.com</a></p>
+                    <p><strong>Mobile:</strong> 9823131575</p>
+                </div>
 
-    <!-- Editorial Board Members -->
-    <div class="board-members">
-      <center><h3>Editorial Board Members</h3></center>
-      <div class="members-grid">
-        <!-- Member Card -->
-        <div class="member card">
-          <h4>Dr. Narsingh Giri</h4>
-          <p><strong>Designation:</strong> Vice Principal</p>
-          <p><strong>College & Address:</strong> PDEA's Waghire College Of Arts, Commerce And Science, Saswad, Tal Purandar, Pune-412301</p>
-          <p><strong>Email:</strong> <a href="mailto:narsigh,giri@smmm.org.in">narsigh,giri@smmm.org.in</a></p>
-          <p><strong>Mobile:</strong> 09689901127</p>
-        </div>
+                <div class="chief-editor card">
+                    <h3>Executive Editor</h3>
+                    <h4>Rushikesh Y Hiwale</h4>
+                    <p><strong>Designation:</strong> Head Of Department</p>
+                    <p><strong>College & Address:</strong> PDEA's Baburaoji Gholap College, Sangvi, Pune - 411023</p>
+                    <p><strong>Email:</strong> <a
+                            href="mailto:rushikesh.hiwale@smmm.org.in">rushikesh.hiwale@smmm.org.in</a></p>
+                    <p><strong>Mobile:</strong> 09096883042</p>
+                </div>
 
-        <div class="member card">
-          <h4>Dr. Ganesh R. Patare</h4>
-          <p><strong>Designation:</strong> Principal</p>
-          <p><strong>College & Address:</strong> Marathwada Mitra Mandal's College of Commerce, Pune</p>
-          <p><strong>Email:</strong> <a href="mailto:ganesh.patare@mmcc.edu.in">ganesh.patare@mmcc.edu.in</a></p>
-          <p><strong>Mobile:</strong> 9923607054</p>
-        </div>
+                <!-- Editorial Board Members -->
+                <div class="board-members">
+                    <center>
+                        <h3>Editorial Board Members</h3>
+                    </center>
+                    <div class="members-grid">
+                        <!-- Member Card -->
 
-        <div class="member card">
-          <h4>Dr. Umrao Jamir Sayyad</h4>
-          <p><strong>Designation:</strong> Professor</p>
-          <p><strong>College & Address:</strong> PDEA's Baburaoji Gholap College, Sangvi, Pune - 411023</p>
-          <p><strong>Email:</strong> <a href="mailto:shaikhumrao@gmail.com">shaikhumrao@gmail.com</a></p>
-          <p><strong>Mobile:</strong> 09850820398</p>
-        </div>
+                        <div class="member card">
+                            <h4>Dr. Narsingh Giri</h4>
+                            <p><strong>Designation:</strong> Vice Principal</p>
+                            <p><strong>College & Address:</strong> PDEA's Waghire College Of Arts, Commerce And Science,
+                                Saswad, Tal Purandar, Pune-412301</p>
+                            <p><strong>Email:</strong> <a
+                                    href="mailto:narsigh,giri@smmm.org.in">narsigh.giri@smmm.org.in</a></p>
+                            <p><strong>Mobile:</strong> 09689901127</p>
+                        </div>
 
-        <div class="member card">
-          <h4>Mr. Mayur Dattatray Mali</h4>
-          <p><strong>Designation:</strong> Assistant Professor</p>
-          <p><strong>College & Address:</strong> G H Raisoni International Skill Tech University, Pune</p>
-          <p><strong>Email:</strong> <a href="mailto:mayur.mali@ghristu.edu.in">mayur.mali@ghristu.edu.in</a></p>
-          <p><strong>Mobile:</strong> 9168511313</p>
-        </div>
+                        <div class="member card">
+                            <h4>Dr. Ganesh R. Patare</h4>
+                            <p><strong>Designation:</strong> Principal</p>
+                            <p><strong>College & Address:</strong> Marathwada Mitra Mandal's College of Commerce, Pune
+                            </p>
+                            <p><strong>Email:</strong> <a
+                                    href="mailto:ganesh.patare@mmcc.edu.in">ganesh.patare@mmcc.edu.in</a></p>
+                            <p><strong>Mobile:</strong> 9923607054</p>
+                        </div>
 
-        <div class="member card">
-          <h4>Mr. Mahesh Nigade</h4>
-          <p><strong>Designation:</strong> Office Superintendent</p>
-          <p><strong>College & Address:</strong> MES’s Neville Wadia Institute of Management Studies & Research, Pune-411001</p>
-          <p><strong>Email:</strong> <a href="mailto:mahesh.nigade@nevillewadia.com">mahesh.nigade@nevillewadia.com</a></p>
-          <p><strong>Mobile:</strong> 8055358357</p>
-        </div>
+                        <div class="member card">
+                            <h4>Dr. Umrao Jamir Sayyad</h4>
+                            <p><strong>Designation:</strong> Professor</p>
+                            <p><strong>College & Address:</strong> PDEA's Baburaoji Gholap College, Sangvi, Pune -
+                                411023</p>
+                            <p><strong>Email:</strong> <a href="mailto:shaikhumrao@gmail.com">shaikhumrao@gmail.com</a>
+                            </p>
+                            <p><strong>Mobile:</strong> 09850820398</p>
+                        </div>
 
-        <div class="member card">
-          <h4>Mr. Shubham Yende</h4>
-          <p><strong>Designation:</strong> Finance Manager</p>
-          <p><strong>College & Address:</strong> KDRT IT Solutions, Aundh Pune 411007</p>
-          <p><strong>Email:</strong> <a href="mailto:shubhamyende84@gmail.com">shubhamyende84@gmail.com</a></p>
-          <p><strong>Mobile:</strong> 7588428617</p>
-        </div>
+                         <div class="member card">
+                            <h4>Dr. Vilas Pol</h4>
+                            <p><strong>Designation:</strong> Professor</p>
+                            <p><strong>College & Address:</strong>Davidson School of Chemical Engineering, Purdue University (USA) </p>
+                            <p><strong>Email:</strong> <a href="mailto:shaikhumrao@gmail.com">vpol@purdue.edu</a>
+                            </p>
+                           <!--<p><strong>Mobile:</strong> 09850820398</p>--> 
+                        </div>
 
-        <div class="member card">
-          <h4>Dr. Deepak Mahadeo Bharti</h4>
-          <p><strong>Designation:</strong> Professor in Economics</p>
-          <p><strong>College & Address:</strong> MSP Mandal's Rajmata Jijau Mahavidylaya, Kille Dharur, Dist. Beed (MS)</p>
-          <p><strong>Email:</strong> <a href="mailto:d.bharti7@yahoo.com">d.bharti7@yahoo.com</a></p>
-          <p><strong>Mobile:</strong> 9422353611</p>
-        </div>
+                        <div class="member card">
+                            <h4>Mr. Mayur Dattatray Mali</h4>
+                            <p><strong>Designation:</strong> Assistant Professor</p>
+                            <p><strong>College & Address:</strong> G H Raisoni Inter International Skill Tech
+                                University, Pune</p>
+                            <p><strong>Email:</strong> <a
+                                    href="mailto:mayur.mali@ghristu.edu.in">mayur.mali@ghristu.edu.in</a></p>
+                            <p><strong>Mobile:</strong> 9168511313</p>
+                        </div>
 
-        <div class="member card">
-          <h4>Ms. Dhanashree Wagh</h4>
-          <p><strong>Designation:</strong> Technical Support</p>
-          <p><strong>College & Address:</strong> KDRT IT Solution, Pune</p>
-          <p><strong>Email:</strong> <a href="mailto:dhanashreewagh@kdrtit.in">dhanashreewagh@kdrtit.in</a></p>
-          <p><strong>Mobile:</strong> 8329483852</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+                        <div class="member card">
+                            <h4>Mr. Mahesh Nigade</h4>
+                            <p><strong>Designation:</strong> Office Superintendent</p>
+                            <p><strong>College & Address:</strong> MES’s Neville Wadia Institute of Management Studies &
+                                Research, Pune-411001</p>
+                            <p><strong>Email:</strong> <a
+                                    href="mailto:mahesh.nigade@nevillewadia.com">mahesh.nigade@nevillewadia.com</a></p>
+                            <p><strong>Mobile:</strong> 8055358357</p>
+                        </div>
+
+                        <div class="member card">
+                            <h4>Prof. Sonal Anant Kadam</h4>
+                            <p><strong>Designation:</strong> Assistant Professor</p>
+                            <p><strong>College & Address:</strong> PDEA's Baburaoji Gholap College, Sangvi, Pune -
+                                411023</p>
+                            <p><strong>Email:</strong> <a href="mailto:mahesh.nigade@nevillewadia.com">
+                                    sonalk1980@gmail.com</a></p>
+                            <p><strong>Mobile:</strong> 8888856090</p>
+                        </div>
+
+                        <div class="member card">
+                            <h4>Mr. Shubham Yende</h4>
+                            <p><strong>Designation:</strong> Finance Manager</p>
+                            <p><strong>College & Address:</strong> KDRT IT Solutions, Aundh Pune 411007</p>
+                            <p><strong>Email:</strong> <a
+                                    href="mailto:shubhamyende84@gmail.com">shubhamyende84@gmail.com</a></p>
+                            <p><strong>Mobile:</strong> 7588428617</p>
+                        </div>
+
+                        <div class="member card">
+                            <h4>Dr. Deepak Mahadeo Bharti</h4>
+                            <p><strong>Designation:</strong> Professor in Economics</p>
+                            <p><strong>College & Address:</strong> MSP Mandal's Rajmata Jijau Mahavidylaya, Kille
+                                Dharur, Dist. Beed (MS)</p>
+                            <p><strong>Email:</strong> <a href="mailto:d.bharti7@yahoo.com">d.bharti7@yahoo.com</a></p>
+                            <p><strong>Mobile:</strong> 9422353611</p>
+                        </div>
+
+                        <div class="member card">
+                            <h4>Ms. Dhanashree Wagh</h4>
+                            <p><strong>Designation:</strong> Technical Support</p>
+                            <p><strong>College & Address:</strong> KDRT IT Solution, Pune</p>
+                            <p><strong>Email:</strong> <a
+                                    href="mailto:dhanashreewagh@kdrtit.in">dhanashreewagh@kdrtit.in</a></p>
+                            <p><strong>Mobile:</strong> 8329483852</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
 
@@ -386,13 +433,13 @@
                 <div class="col-lg-4 col-md-6 footer-about">
 
                     <a href="index.html" class="logo d-flex align-items-center">
-                        <span class="sitename">JNARI</span>
+                        <span class="sitename">JIARI</span>
                     </a>
 
                     <div class="footer-contact pt-3">
 
                         <p>
-                            Journal of National Academic Research and Innovation (JNARI)
+                            Journal of International Academic Research and Innovation (JIARI)
                         </p>
 
                         <p>
